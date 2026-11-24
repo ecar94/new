@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Lección Neural A1 — Possessive Adjectives &amp; Family Relationships | By Coach Carlos O.</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #fdf2f8 100%);
+      color: #0f172a;
+    }
+    .pink-status-col {
+      background-color: #ffe4e6;
+      border-color: #fda4af;
+      color: #9f1239;
+      transition: all 0.25s ease;
+    }
+    .pink-status-col.is-correct {
+      background-color: #dcfce7;
+      border-color: #22c55e;
+      color: #166534;
+    }
+    .pink-status-col.is-wrong {
+      background-color: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+    .speaking-pulse {
+      animation: pulseRing 1.4s infinite;
+    }
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-rose-500 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+          A1
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">
+            Super Lección Neural A1 — Possessive Adjectives &amp; Family Relationships
+          </h1>
+          <p class="text-xs text-slate-500 font-medium">
+            EasyEnglishEducation • By Coach Carlos O. • Neuroeducation &amp; Active Recall
+          </p>
+        </div>
+      </div>
+
+      <!-- Global TTS & Progress Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1.5 rounded-lg border border-slate-200">
+          <span class="text-xs font-semibold text-slate-600">🇺🇸 Voice:</span>
+          <select id="voice-select" class="text-xs bg-transparent font-medium text-slate-800 focus:outline-none max-w-[150px]"></select>
+          <select id="rate-select" class="text-xs bg-white border border-slate-200 rounded px-1.5 py-0.5 font-semibold text-slate-700">
+            <option value="0.75">0.75x</option>
+            <option value="0.9" selected>1.0x</option>
+            <option value="1.1">1.1x</option>
+          </select>
+        </div>
+        <div class="bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-lg text-xs font-bold text-indigo-700">
+          Mastery: <span id="global-score">0</span> / <span id="global-total">10</span>
+        </div>
+        <button id="reset-progress-btn" type="button" class="text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- Module Tabs -->
+    <nav class="max-w-6xl mx-auto px-4 pb-2.5 flex gap-2 overflow-x-auto" id="module-tabs" aria-label="Grammar Modules"></nav>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-4 right-4 z-50 hidden max-w-sm bg-slate-900 text-white text-sm font-medium px-4 py-3 rounded-xl shadow-lg"></div>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-1 space-y-6" id="app-main"></main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white/80 py-4 text-center text-xs text-slate-500">
+    © Developed for educational excellence By Coach Carlos O. • EasyEnglishEducation (CEFR A1)
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'super_leccion_neural_a1_possessive_adjectives_v1';
+
+      const MODULES = [
+        {
+          id: 'possessives',
+          num: 3,
+          shortTitle: '3. Possessive Adjectives & Family',
+          title: 'Module 3: Possessive Adjectives and Family Relationships',
+          cefrTag: 'A1 Core Grammar • Family & Workplace',
+          meaning: 'Possessive adjectives show who something belongs to or the relationship between people. They always come directly before a noun (my family, your sister, his office, her sister, our office, their administrator).',
+          structure: 'I → my  |  You → your  |  He → his  |  She → her  |  We → our  |  They → their (+ Noun)',
+          neuralTip: 'Person-to-Possessive Link: Match the owner, NOT the object! Even if the noun is "sister", if the owner is a man (Rob), use "his sister". If the owner is a woman (Karen), use "her sister".',
+          referenceTable: [
+            { subject: 'I', possessive: 'my', example: 'My family lives in Poland.' },
+            { subject: 'You', possessive: 'your', example: 'Where is your sister?' },
+            { subject: 'He', possessive: 'his', example: 'His office is in London.' },
+            { subject: 'She', possessive: 'her', example: 'Her sister lives in Brooklyn.' },
+            { subject: 'We', possessive: 'our', example: 'Our office is in New York.' },
+            { subject: 'They', possessive: 'their', example: 'Their administrator is very helpful.' }
+          ],
+          examples: [
+            { en: 'My family lives in Poland.', note: 'Subject: I → Possessive: my' },
+            { en: 'Where is your sister?', note: 'Subject: You → Possessive: your' },
+            { en: 'His office is in London.', note: 'Subject: He (Rob) → Possessive: his' },
+            { en: 'Her sister lives in Brooklyn.', note: 'Subject: She (Karen) → Possessive: her' },
+            { en: 'Our office is in New York.', note: 'Subject: We → Possessive: our' },
+            { en: 'Their administrator is very helpful.', note: 'Subject: They → Possessive: their' },
+            { en: 'My brother works in a hotel in Manhattan.', note: 'Extra Example 1: I → my (+ family noun)' },
+            { en: 'What is your manager\'s name?', note: 'Extra Example 2: You → your (+ workplace noun)' },
+            { en: 'Daniel is at work; his meeting starts at twelve.', note: 'Extra Example 3: He (Daniel) → his' },
+            { en: 'Jenny loves her new apartment in New York.', note: 'Extra Example 4: She (Jenny) → her' },
+            { en: 'Rob and Karen like their colleagues in London.', note: 'Extra Example 5: They (Rob & Karen) → their' }
+          ],
+          exercises: [
+            {
+              id: 'p1',
+              prompt: 'Choose the correct possessive adjective: "Jenny has family in Poland. __________ family is in Poland."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['her'],
+              hint: 'Jenny = she. Which possessive adjective corresponds to "she"?',
+              displayAnswer: 'Her'
+            },
+            {
+              id: 'p2',
+              prompt: 'Choose the correct possessive adjective: "Karen has a sister. __________ sister lives in Brooklyn."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['her'],
+              hint: 'Karen = she. Use the feminine singular possessive adjective.',
+              displayAnswer: 'Her'
+            },
+            {
+              id: 'p3',
+              prompt: 'Choose the correct possessive adjective: "Rob works in London. __________ office is in London."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['his'],
+              hint: 'Rob = he. Which possessive adjective corresponds to "he"?',
+              displayAnswer: 'His'
+            },
+            {
+              id: 'p4',
+              prompt: 'Choose the correct possessive adjective: "Daniel has a meeting. __________ meeting is at twelve."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['his'],
+              hint: 'Daniel = he. Use the masculine singular possessive adjective.',
+              displayAnswer: 'His'
+            },
+            {
+              id: 'p5',
+              prompt: 'Choose the correct possessive adjective: "We work together. __________ office is in London."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['our'],
+              hint: 'The subject is "We". Which possessive adjective matches "we"?',
+              displayAnswer: 'Our'
+            },
+            {
+              id: 'p6',
+              prompt: 'Choose the correct possessive adjective: "I am from Warsaw. __________ family lives in Poland."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['my'],
+              hint: 'The subject is "I". Match it with the first-person singular possessive adjective.',
+              displayAnswer: 'My'
+            },
+            {
+              id: 'p7',
+              prompt: 'Choose the correct possessive adjective: "You work in Manhattan. Where is __________ office?"',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['your'],
+              hint: 'The question addresses "You". Use the second-person possessive adjective.',
+              displayAnswer: 'your'
+            },
+            {
+              id: 'p8',
+              prompt: 'Choose the correct possessive adjective: "Rob and Karen work in London. __________ administrator is very helpful."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['their'],
+              hint: '"Rob and Karen" = they. Which possessive adjective matches "they"?',
+              displayAnswer: 'Their'
+            },
+            {
+              id: 'p9',
+              prompt: 'Choose the correct possessive adjective: "Jenny is a journalist. __________ job is in New York."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['her'],
+              hint: 'Jenny = she. Use the possessive adjective for a female subject.',
+              displayAnswer: 'Her'
+            },
+            {
+              id: 'p10',
+              prompt: 'Choose the correct possessive adjective: "My sister and I live in Brooklyn. __________ apartment is near the park."',
+              placeholder: 'Type my, your, his, her, our, or their...',
+              answers: ['our'],
+              hint: '"My sister and I" = we. Use the first-person plural possessive adjective.',
+              displayAnswer: 'Our'
+            }
+          ],
+          speakingItems: [
+            {
+              id: 'poss_sp1',
+              text: 'My family lives in Poland, and my sister lives in Warsaw.',
+              keywords: ['my', 'family', 'lives', 'poland', 'sister', 'warsaw']
+            },
+            {
+              id: 'poss_sp2',
+              text: 'Where is your sister, and where does your family live?',
+              keywords: ['where', 'your', 'sister', 'does', 'family', 'live']
+            },
+            {
+              id: 'poss_sp3',
+              text: 'Rob works in London, and his office is near the station.',
+              keywords: ['rob', 'works', 'london', 'his', 'office', 'station']
+            },
+            {
+              id: 'poss_sp4',
+              text: 'Karen has a sister, and her sister lives in Brooklyn.',
+              keywords: ['karen', 'has', 'sister', 'her', 'lives', 'brooklyn']
+            },
+            {
+              id: 'poss_sp5',
+              text: 'We work together, and our office is in New York.',
+              keywords: ['work', 'together', 'our', 'office', 'new', 'york']
+            },
+            {
+              id: 'poss_sp6',
+              text: 'Rob and Karen work in London, and their administrator is very helpful.',
+              keywords: ['rob', 'karen', 'london', 'their', 'administrator', 'helpful']
+            },
+            {
+              id: 'poss_sp7',
+              text: 'Jenny has family in Poland, and her parents visit New York every summer.',
+              keywords: ['jenny', 'family', 'poland', 'her', 'parents', 'york']
+            },
+            {
+              id: 'poss_sp8',
+              text: 'Daniel has a busy schedule, and his meeting is at twelve o\'clock.',
+              keywords: ['daniel', 'busy', 'schedule', 'his', 'meeting', 'twelve']
+            },
+            {
+              id: 'poss_sp9',
+              text: 'I introduce my colleague to our team before the morning presentation.',
+              keywords: ['introduce', 'my', 'colleague', 'our', 'team', 'presentation']
+            },
+            {
+              id: 'poss_sp10',
+              text: 'Do you know their manager, or is your office on a different floor?',
+              keywords: ['know', 'their', 'manager', 'your', 'office', 'floor']
+            }
+          ],
+          speakingPrompt: 'Listen to the American English narrator and read all 10 A1 sentences aloud to master my, your, his, her, our, and their.'
+        }
+      ];
+
+      let state = {
+        activeModuleId: 'possessives',
+        answers: {},
+        revealed: {},
+        transcripts: {}
+      };
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') {
+            state = { ...state, ...parsed };
+            if (!state.revealed || typeof state.revealed !== 'object') {
+              state.revealed = {};
+            }
+          }
+        }
+      } catch (e) { /* sandbox safe */ }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) { /* sandbox safe */ }
+      }
+
+      function showToast(msg) {
+        const el = document.getElementById('toast-banner');
+        el.textContent = msg;
+        el.classList.remove('hidden');
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => el.classList.add('hidden'), 3200);
+      }
+
+      let availableVoices = [];
+      function populateVoices() {
+        const select = document.getElementById('voice-select');
+        if (!('speechSynthesis' in window)) {
+          select.innerHTML = '<option>TTS Unavailable</option>';
+          return;
+        }
+        const voices = window.speechSynthesis.getVoices() || [];
+        const usVoices = voices.filter(v => /en[-_]?US/i.test(v.lang));
+        const enVoices = usVoices.length ? usVoices : voices.filter(v => /^en/i.test(v.lang));
+        availableVoices = enVoices.length ? enVoices : voices;
+
+        select.innerHTML = '';
+        if (!availableVoices.length) {
+          const opt = document.createElement('option');
+          opt.textContent = 'en-US Default';
+          select.appendChild(opt);
+          return;
+        }
+        availableVoices.forEach((v, idx) => {
+          const opt = document.createElement('option');
+          opt.value = String(idx);
+          opt.textContent = v.name.replace(/Microsoft |Google /g, '');
+          if (/en[-_]?US/i.test(v.lang) && /natural|jenny|aria|guy|samantha|google us/i.test(v.name.toLowerCase())) {
+            opt.selected = true;
+          }
+          select.appendChild(opt);
+        });
+      }
+
+      if ('speechSynthesis' in window) {
+        populateVoices();
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+
+      function speakText(text) {
+        if (!('speechSynthesis' in window)) {
+          showToast('Speech synthesis is not supported in this browser.');
+          return;
+        }
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US';
+        const voiceSelect = document.getElementById('voice-select');
+        const rateSelect = document.getElementById('rate-select');
+        const idx = parseInt(voiceSelect.value, 10);
+        if (!isNaN(idx) && availableVoices[idx]) {
+          utter.voice = availableVoices[idx];
+        }
+        utter.rate = parseFloat(rateSelect.value) || 0.9;
+        window.speechSynthesis.speak(utter);
+      }
+
+      let activeRecognition = null;
+      let activeMicItemId = null;
+
+      function normalizeText(str) {
+        return (str || '')
+          .toLowerCase()
+          .replace(/[’']/g, "'")
+          .replace(/[^a-z0-9'\s]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function evaluateSpeech(item, spokenText) {
+        const normSpoken = normalizeText(spokenText);
+        if (!normSpoken) {
+          return {
+            score: 0,
+            matched: [],
+            missing: item.keywords,
+            message: 'Speak into your microphone or type your spoken response to receive neural feedback.'
+          };
+        }
+        const words = new Set(normSpoken.split(' '));
+        const matched = item.keywords.filter(k => words.has(k.toLowerCase()));
+        const missing = item.keywords.filter(k => !words.has(k.toLowerCase()));
+        const score = Math.round((matched.length / item.keywords.length) * 100);
+
+        let message = '';
+        if (score >= 85) {
+          message = 'Great job! Your A1 Possessive Adjectives pronunciation and target words were clearly recognized.';
+        } else if (score >= 50) {
+          message = 'Good effort! Try speaking these target words clearly: ' + missing.join(', ') + '.';
+        } else {
+          message = 'Keep practicing! Listen to the American English model again and focus on: ' + missing.join(', ') + '.';
+        }
+        return { score, matched, missing, message };
+      }
+
+      function toggleSpeechRecognition(item) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          showToast('Live SpeechRecognition is unavailable here — you can type in the transcription box and click Evaluate!');
+          return;
+        }
+        if (activeRecognition && activeMicItemId === item.id) {
+          activeRecognition.stop();
+          activeRecognition = null;
+          activeMicItemId = null;
+          render();
+          return;
+        }
+        if (activeRecognition) {
+          activeRecognition.stop();
+        }
+        try {
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+          const rec = new SpeechRec();
+          rec.lang = 'en-US';
+          rec.interimResults = true;
+          rec.continuous = !isMobile;
+          activeRecognition = rec;
+          activeMicItemId = item.id;
+          render();
+
+          let accumulatedFinal = state.transcripts[item.id] ? state.transcripts[item.id] + ' ' : '';
+
+          rec.onresult = (event) => {
+            let finalPart = '';
+            let interimPart = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+              const transcript = event.results[i][0].transcript;
+              if (event.results[i].isFinal) {
+                finalPart += transcript + ' ';
+              } else {
+                interimPart += transcript;
+              }
+            }
+            if (finalPart) {
+              accumulatedFinal += finalPart;
+            }
+            const combined = (accumulatedFinal + interimPart).trim();
+            state.transcripts[item.id] = combined;
+            saveState();
+            const box = document.getElementById('transcript-box-' + item.id);
+            if (box) box.value = combined;
+            updateSpeechFeedbackDOM(item);
+          };
+
+          rec.onerror = () => {
+            activeRecognition = null;
+            activeMicItemId = null;
+            showToast('Microphone access was blocked or unavailable. You can still type in the transcription box to test feedback.');
+            render();
+          };
+
+          rec.onend = () => {
+            activeRecognition = null;
+            activeMicItemId = null;
+            render();
+          };
+
+          rec.start();
+        } catch (err) {
+          activeRecognition = null;
+          activeMicItemId = null;
+          showToast('Could not start microphone. Type in the transcription box to evaluate.');
+          render();
+        }
+      }
+
+      function updateSpeechFeedbackDOM(item) {
+        const feedbackEl = document.getElementById('speech-feedback-' + item.id);
+        if (!feedbackEl) return;
+        const spoken = state.transcripts[item.id] || '';
+        const res = evaluateSpeech(item, spoken);
+        const isGood = res.score >= 85;
+        feedbackEl.className = 'mt-3 p-3.5 rounded-xl border text-sm transition ' +
+          (spoken ? (isGood ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : 'bg-amber-50 border-amber-300 text-amber-900') : 'bg-slate-50 border-slate-200 text-slate-600');
+        feedbackEl.innerHTML = `
+          <div class="flex items-center justify-between gap-2 font-bold mb-1">
+            <span>Neural Pronunciation &amp; Grammar Check</span>
+            <span>${res.score}% Match</span>
+          </div>
+          <p class="text-xs leading-relaxed">${res.message}</p>
+          ${res.matched.length ? `<div class="mt-2 flex flex-wrap gap-1">${res.matched.map(w => `<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">✓ ${w}</span>`).join('')}</div>` : ''}
+        `;
+      }
+
+      function normalizeAnswer(str) {
+        return (str || '')
+          .toLowerCase()
+          .replace(/[’']/g, "'")
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function isAnswerUnlocked(exId) {
+        const entry = state.answers[exId];
+        return Boolean(
+          state.revealed[exId] ||
+          (entry && (entry.status === 'correct' || entry.status === 'wrong'))
+        );
+      }
+
+      function checkExercise(exId, mod) {
+        const ex = mod.exercises.find(e => e.id === exId);
+        if (!ex) return;
+        const input = document.getElementById('input-' + exId);
+        const val = input ? input.value : '';
+        const norm = normalizeAnswer(val);
+        const isCorrect = ex.answers.some(a => normalizeAnswer(a) === norm);
+
+        state.answers[exId] = {
+          value: val,
+          status: norm === '' ? 'idle' : (isCorrect ? 'correct' : 'wrong')
+        };
+        if (norm !== '') {
+          state.revealed[exId] = true;
+        }
+        saveState();
+        updateGlobalScore();
+        renderExerciseRow(ex, mod);
+      }
+
+      function updateGlobalScore() {
+        const total = MODULES.reduce((sum, m) => sum + m.exercises.length, 0);
+        const correct = Object.values(state.answers).filter(a => a && a.status === 'correct').length;
+        document.getElementById('global-score').textContent = String(correct);
+        document.getElementById('global-total').textContent = String(total);
+      }
+
+      function renderTabs() {
+        const nav = document.getElementById('module-tabs');
+        nav.innerHTML = '';
+        MODULES.forEach(m => {
+          const doneCount = m.exercises.filter(e => state.answers[e.id]?.status === 'correct').length;
+          const active = m.id === state.activeModuleId;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 border ' +
+            (active
+              ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50');
+          btn.innerHTML = `<span>${m.shortTitle}</span><span class="px-1.5 py-0.5 rounded-md text-[11px] ${active ? 'bg-indigo-500 text-white' : 'bg-slate-100 text-slate-600'}">${doneCount}/${m.exercises.length}</span>`;
+          btn.addEventListener('click', () => {
+            state.activeModuleId = m.id;
+            saveState();
+            render();
+          });
+          nav.appendChild(btn);
+        });
+      }
+
+      function renderExerciseRow(ex, mod) {
+        const card = document.getElementById('ex-card-' + ex.id);
+        if (!card) return;
+        const entry = state.answers[ex.id] || { value: '', status: 'idle' };
+        const unlocked = isAnswerUnlocked(ex.id);
+        const statusCol = card.querySelector('.pink-status-col');
+        const statusText = card.querySelector('.status-label');
+        const answerPanel = card.querySelector('.answer-reveal-box');
+        const audioBtn = card.querySelector('.speak-ex-btn');
+        const audioLabel = card.querySelector('.audio-lock-label');
+
+        statusCol.classList.remove('is-correct', 'is-wrong');
+        if (entry.status === 'correct') {
+          statusCol.classList.add('is-correct');
+          statusText.textContent = '✓ Correct! Neural link reinforced.';
+        } else if (entry.status === 'wrong') {
+          statusCol.classList.add('is-wrong');
+          statusText.textContent = '✗ Not quite. Review the answer or try again.';
+        } else {
+          statusText.textContent = 'Pending — Answer to turn green';
+        }
+
+        if (answerPanel) {
+          if (unlocked) {
+            answerPanel.classList.remove('hidden');
+          } else {
+            answerPanel.classList.add('hidden');
+          }
+        }
+
+        if (audioLabel) {
+          audioLabel.textContent = unlocked ? 'Model Audio' : 'Locked until answered';
+        }
+
+        if (audioBtn) {
+          if (unlocked) {
+            audioBtn.disabled = false;
+            audioBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+            audioBtn.title = 'Listen to the answer';
+          } else {
+            audioBtn.disabled = true;
+            audioBtn.classList.add('opacity-40', 'cursor-not-allowed');
+            audioBtn.title = 'Submit your answer or click Answer first';
+          }
+        }
+      }
+
+      function render() {
+        renderTabs();
+        updateGlobalScore();
+
+        const mod = MODULES.find(m => m.id === state.activeModuleId) || MODULES[0];
+        const main = document.getElementById('app-main');
+        const speechItems = mod.speakingItems || [];
+
+        main.innerHTML = `
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 mb-2">${mod.cefrTag}</span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">${mod.title}</h2>
+              </div>
+              <button type="button" id="speak-rule-btn" class="px-3.5 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs sm:text-sm flex items-center gap-2 transition">
+                <span>🔊</span> Listen to Explanation
+              </button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Meaning &amp; Use</div>
+                <p class="text-sm text-slate-800 leading-relaxed">${mod.meaning}</p>
+              </div>
+              <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">Core Mapping</div>
+                <p class="text-sm font-bold text-indigo-950 leading-relaxed">${mod.structure}</p>
+                <p class="text-xs text-indigo-700 mt-2"><strong>🧠 Neural Tip:</strong> ${mod.neuralTip}</p>
+              </div>
+            </div>
+
+            <!-- Subject -> Possessive Adjective Reference Matrix -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left border-collapse text-sm">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider border-b border-slate-200">
+                    <th class="py-2.5 px-4 font-extrabold">Subject Pronoun</th>
+                    <th class="py-2.5 px-4 font-extrabold text-indigo-700">Possessive Adjective</th>
+                    <th class="py-2.5 px-4 font-extrabold">Model Sentence</th>
+                    <th class="py-2.5 px-4 font-extrabold text-right">Audio</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 bg-white">
+                  ${mod.referenceTable.map(row => `
+                    <tr class="hover:bg-indigo-50/40 transition">
+                      <td class="py-2.5 px-4 font-bold text-slate-800">${row.subject}</td>
+                      <td class="py-2.5 px-4 font-extrabold text-indigo-700">${row.possessive}</td>
+                      <td class="py-2.5 px-4 font-medium text-slate-900">${row.example}</td>
+                      <td class="py-2.5 px-4 text-right">
+                        <button type="button" data-speak="${row.example.replace(/"/g, '&quot;')}" class="speak-model-btn inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 hover:bg-indigo-100 hover:text-indigo-700 transition" title="Listen in American English">
+                          🔊
+                        </button>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-extrabold text-slate-900">Guided Grammar Examples (${mod.examples.length} A1 Models)</h3>
+                <p class="text-xs text-slate-500">Includes the 6 core examples plus 5 additional family and workplace models. Click any speaker icon to listen.</p>
+              </div>
+              <button type="button" id="play-all-examples-btn" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+                ▶ Play First 3
+              </button>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              ${mod.examples.map((ex, idx) => `
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:shadow-sm transition flex flex-col justify-between gap-3">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-700">Example ${idx + 1}</span>
+                      <button type="button" data-speak="${ex.en.replace(/"/g, '&quot;')}" class="speak-model-btn w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-indigo-400 hover:text-indigo-600 flex items-center justify-center text-sm shadow-sm transition" title="Listen in American English">
+                        🔊
+                      </button>
+                    </div>
+                    <p class="text-sm font-semibold text-slate-900 leading-snug">${ex.en}</p>
+                  </div>
+                  <div class="text-[11px] font-medium text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100">
+                    ${ex.note}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-extrabold text-slate-900">Active Recall Practice (${mod.exercises.length} Exercises)</h3>
+                <p class="text-xs text-slate-500">Answers stay hidden until you submit an attempt and click <strong>Check</strong>, or click <strong>Answer</strong>. The pink status column turns <strong>green</strong> when your answer is accurate.</p>
+              </div>
+              <button type="button" id="check-all-btn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm transition">
+                Check All Answers
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              ${mod.exercises.map((ex, idx) => {
+                const saved = state.answers[ex.id] || { value: '', status: 'idle' };
+                const unlocked = isAnswerUnlocked(ex.id);
+                const statusClass = saved.status === 'correct' ? 'is-correct' : (saved.status === 'wrong' ? 'is-wrong' : '');
+                const statusLabel = saved.status === 'correct'
+                  ? '✓ Correct! Neural link reinforced.'
+                  : (saved.status === 'wrong' ? '✗ Not quite. Review the answer or try again.' : 'Pending — Answer to turn green');
+
+                return `
+                  <div id="ex-card-${ex.id}" class="grid md:grid-cols-12 gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50/50 items-center">
+                    <div class="md:col-span-8 space-y-2">
+                      <div class="text-xs font-bold text-slate-500">Exercise ${idx + 1}</div>
+                      <p class="text-sm font-semibold text-slate-900">${ex.prompt}</p>
+                      <div class="flex flex-wrap gap-2">
+                        <input
+                          id="input-${ex.id}"
+                          type="text"
+                          value="${(saved.value || '').replace(/"/g, '&quot;')}"
+                          placeholder="${ex.placeholder}"
+                          autocomplete="off"
+                          class="flex-1 min-w-[200px] px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        />
+                        <button type="button" data-check="${ex.id}" class="check-one-btn px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition">
+                          Check
+                        </button>
+                        <button type="button" data-hint="${ex.id}" class="hint-btn px-2.5 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition">
+                          Hint
+                        </button>
+                        <button type="button" data-reveal="${ex.id}" class="reveal-btn px-2.5 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition">
+                          Answer
+                        </button>
+                      </div>
+                      <div id="hint-box-${ex.id}" class="hidden text-xs text-indigo-700 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-200">
+                        💡 ${ex.hint}
+                      </div>
+                      <div class="answer-reveal-box ${unlocked ? '' : 'hidden'} text-xs text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 font-semibold">
+                        ✓ Answer: <span class="font-bold">${ex.displayAnswer}</span>
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-4 pink-status-col ${statusClass} border-2 rounded-xl p-3 flex flex-col justify-between gap-2 min-h-[82px]">
+                      <div class="text-xs font-bold status-label">${statusLabel}</div>
+                      <div class="flex items-center justify-between gap-2">
+                        <span class="audio-lock-label text-[11px] opacity-80 font-medium">${unlocked ? 'Model Audio' : 'Locked until answered'}</span>
+                        <button
+                          type="button"
+                          data-ex-id="${ex.id}"
+                          data-speak="${ex.displayAnswer.replace(/"/g, '&quot;')}"
+                          ${unlocked ? '' : 'disabled'}
+                          title="${unlocked ? 'Listen to the answer' : 'Submit your answer or click Answer first'}"
+                          class="speak-ex-btn px-2.5 py-1 rounded-lg bg-white/80 hover:bg-white text-slate-800 text-xs font-bold shadow-sm transition ${unlocked ? '' : 'opacity-40 cursor-not-allowed'}"
+                        >
+                          🔊 Listen
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-700 mb-1">🎙️ Neural Speech Recognition Lab (${speechItems.length} Sentences)</span>
+              <h3 class="text-lg font-extrabold text-slate-900">Oral Production &amp; Transcription Feedback</h3>
+              <p class="text-xs text-slate-600 mt-0.5">${mod.speakingPrompt}</p>
+            </div>
+
+            <div class="space-y-4">
+              ${speechItems.map((item, idx) => {
+                const isListening = activeMicItemId === item.id;
+                return `
+                  <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <span class="text-xs font-extrabold uppercase tracking-wider text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-1 rounded-lg">
+                        Sentence ${idx + 1} of ${speechItems.length}
+                      </span>
+                      <button type="button" data-speak="${item.text.replace(/"/g, '&quot;')}" class="speak-model-btn px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 text-xs font-bold shadow-sm transition">
+                        🔊 Hear Target Sentence
+                      </button>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 text-sm font-semibold text-indigo-950">
+                      "${item.text}"
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2.5">
+                      <button type="button" data-mic-id="${item.id}" class="mic-item-btn px-4 py-2 rounded-xl font-bold text-xs sm:text-sm text-white flex items-center gap-2 transition ${isListening ? 'bg-rose-600 speaking-pulse' : 'bg-rose-500 hover:bg-rose-600'}">
+                        <span>${isListening ? '⏹ Stop Listening' : '🎙️ Start Speaking (en-US)'}</span>
+                      </button>
+                      <button type="button" data-eval-id="${item.id}" class="eval-item-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold transition">
+                        Evaluate Transcription
+                      </button>
+                      <button type="button" data-clear-id="${item.id}" class="clear-item-btn px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-600 hover:bg-slate-100 text-xs font-semibold transition">
+                        Clear
+                      </button>
+                    </div>
+
+                    <div>
+                      <label for="transcript-box-${item.id}" class="block text-xs font-bold text-slate-600 mb-1">
+                        Live Transcription Box (also editable if mic is unavailable):
+                      </label>
+                      <textarea
+                        id="transcript-box-${item.id}"
+                        rows="2"
+                        placeholder="Your spoken English for Sentence ${idx + 1} will appear here in real time..."
+                        class="w-full p-3 rounded-xl border border-slate-300 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-400"
+                      >${state.transcripts[item.id] || ''}</textarea>
+                    </div>
+
+                    <div id="speech-feedback-${item.id}"></div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        `;
+
+        document.getElementById('speak-rule-btn').addEventListener('click', () => {
+          speakText(mod.title + '. ' + mod.meaning);
+        });
+
+        document.getElementById('play-all-examples-btn').addEventListener('click', () => {
+          const text = mod.examples.slice(0, 3).map(e => e.en).join(' ... ');
+          speakText(text);
+        });
+
+        main.querySelectorAll('.speak-model-btn').forEach(btn => {
+          btn.addEventListener('click', () => speakText(btn.getAttribute('data-speak')));
+        });
+
+        main.querySelectorAll('.speak-ex-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const exId = btn.getAttribute('data-ex-id');
+            if (!isAnswerUnlocked(exId)) {
+              showToast('Submit your answer or click Answer first to unlock audio.');
+              return;
+            }
+            speakText(btn.getAttribute('data-speak'));
+          });
+        });
+
+        main.querySelectorAll('.check-one-btn').forEach(btn => {
+          btn.addEventListener('click', () => checkExercise(btn.getAttribute('data-check'), mod));
+        });
+
+        document.getElementById('check-all-btn').addEventListener('click', () => {
+          mod.exercises.forEach(ex => checkExercise(ex.id, mod));
+          showToast('Checked all exercises in ' + mod.shortTitle + '!');
+        });
+
+        main.querySelectorAll('.hint-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const box = document.getElementById('hint-box-' + btn.getAttribute('data-hint'));
+            if (box) box.classList.toggle('hidden');
+          });
+        });
+
+        main.querySelectorAll('.reveal-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-reveal');
+            const ex = mod.exercises.find(e => e.id === id);
+            const inp = document.getElementById('input-' + id);
+            if (ex && inp) {
+              state.revealed[id] = true;
+              inp.value = ex.displayAnswer;
+              checkExercise(id, mod);
+            }
+          });
+        });
+
+        speechItems.forEach(item => {
+          const tBox = document.getElementById('transcript-box-' + item.id);
+          if (tBox) {
+            tBox.addEventListener('input', () => {
+              state.transcripts[item.id] = tBox.value;
+              saveState();
+            });
+          }
+          updateSpeechFeedbackDOM(item);
+        });
+
+        main.querySelectorAll('.mic-item-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const item = speechItems.find(i => i.id === btn.getAttribute('data-mic-id'));
+            if (item) toggleSpeechRecognition(item);
+          });
+        });
+
+        main.querySelectorAll('.eval-item-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-eval-id');
+            const item = speechItems.find(i => i.id === id);
+            const box = document.getElementById('transcript-box-' + id);
+            state.transcripts[id] = box ? box.value : '';
+            saveState();
+            if (item) updateSpeechFeedbackDOM(item);
+          });
+        });
+
+        main.querySelectorAll('.clear-item-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-clear-id');
+            const item = speechItems.find(i => i.id === id);
+            state.transcripts[id] = '';
+            saveState();
+            const box = document.getElementById('transcript-box-' + id);
+            if (box) box.value = '';
+            if (item) updateSpeechFeedbackDOM(item);
+          });
+        });
+      }
+
+      document.getElementById('reset-progress-btn').addEventListener('click', () => {
+        state.answers = {};
+        state.revealed = {};
+        state.transcripts = {};
+        saveState();
+        render();
+        showToast('All A1 module progress has been reset.');
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
