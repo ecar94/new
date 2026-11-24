@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Super Neural Lesson A1–A2 — Adverbs Mastery | By Coach Carlos O.</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #fdf2f8 100%);
+      color: #0f172a;
+      padding-bottom: env(safe-area-inset-bottom);
+      overflow-x: hidden;
+    }
+    button, select, input, textarea {
+      touch-action: manipulation;
+    }
+    /* Prevent iOS Safari auto-zoom on focus (requires >= 16px on mobile) */
+    @media (max-width: 640px) {
+      input[type="text"], textarea, select {
+        font-size: 16px !important;
+      }
+    }
+    /* Custom subtle horizontal scrollbar for mobile module tabs */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .pink-status-col {
+      background-color: #ffe4e6;
+      border-color: #fda4af;
+      color: #9f1239;
+      transition: all 0.25s ease;
+    }
+    .pink-status-col.is-correct {
+      background-color: #dcfce7;
+      border-color: #22c55e;
+      color: #166534;
+    }
+    .pink-status-col.is-wrong {
+      background-color: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+    .speaking-pulse {
+      animation: pulseRing 1.4s infinite;
+    }
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-xl bg-gradient-to-br from-indigo-600 to-rose-500 text-white flex items-center justify-center font-extrabold text-xs sm:text-base shadow-sm">
+            A1-A2
+          </div>
+          <div class="min-w-0">
+            <h1 class="text-sm sm:text-lg font-extrabold text-slate-900 leading-tight truncate">
+              Super Neural Lesson A1–A2 — Essential Adverbs
+            </h1>
+            <p class="text-[11px] sm:text-xs text-slate-500 font-medium truncate">
+              EasyEnglishEducation • By Coach Carlos O.
+            </p>
+          </div>
+        </div>
+        <div class="sm:hidden shrink-0 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-lg text-xs font-bold text-indigo-700">
+          <span id="global-score-mobile">0</span>/<span id="global-total-mobile">27</span>
+        </div>
+      </div>
+
+      <!-- Global TTS & Progress Controls -->
+      <div class="flex items-center justify-between sm:justify-end gap-2">
+        <div class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1.5 rounded-lg border border-slate-200 flex-1 sm:flex-initial min-w-0">
+          <span class="text-xs font-semibold text-slate-600 shrink-0">🇺🇸</span>
+          <select id="voice-select" aria-label="Select Voice" class="text-xs bg-transparent font-medium text-slate-800 focus:outline-none truncate flex-1 sm:max-w-[150px]"></select>
+          <select id="rate-select" aria-label="Select Speech Rate" class="text-xs bg-white border border-slate-200 rounded px-1.5 py-1 font-semibold text-slate-700 shrink-0">
+            <option value="0.8">0.8x</option>
+            <option value="0.95" selected>1.0x</option>
+            <option value="1.15">1.15x</option>
+          </select>
+        </div>
+        <div class="hidden sm:block bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-lg text-xs font-bold text-indigo-700 shrink-0">
+          Mastery: <span id="global-score">0</span> / <span id="global-total">27</span>
+        </div>
+        <button id="reset-progress-btn" type="button" class="text-xs font-semibold px-3 py-2 min-h-[36px] rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 active:bg-slate-200 transition shrink-0">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- Module Tabs -->
+    <nav class="max-w-6xl mx-auto px-3 sm:px-4 pb-2.5 flex gap-2 overflow-x-auto no-scrollbar" id="module-tabs" aria-label="Grammar Modules"></nav>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 z-50 hidden sm:max-w-sm bg-slate-900 text-white text-sm font-medium px-4 py-3 rounded-xl shadow-lg text-center sm:text-left"></div>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-1 space-y-6" id="app-main"></main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white/80 py-4 text-center text-xs text-slate-500">
+    © 2026 EasyEnglishEducation — Super Neural Lesson Series (CEFR A1–A2) • By Coach Carlos O.
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'super_neural_lesson_adverbs_a1_a2_v1';
+
+      const MODULES = [
+        {
+          id: 'manner_adverbs',
+          num: 1,
+          shortTitle: '1. Adverbs of Manner',
+          title: 'Module 1: Adverbs of Manner (How We Do Things)',
+          cefrTag: 'CEFR A1–A2 Action Description',
+          meaning: 'Adverbs of manner tell us HOW an action happens. Most adverbs of manner are formed by adding -ly to an adjective (slow → slowly), while a few common ones are irregular (good → well, fast → fast, hard → hard).',
+          structure: 'Subject + Verb (+ Object) + Adverb of Manner (Adjective + -ly / Irregular: well, fast, hard)',
+          neuralTip: 'Dual Coding & Motor Memory: Picture the action in slow motion or fast motion! Remember: adjectives describe nouns ("a careful driver"), while adverbs describe verbs ("drives carefully").',
+          examples: [
+            { en: 'She speaks English very clearly.', context: 'Adjective "clear" + -ly → "clearly"', note: 'Regular Adverb (-ly)' },
+            { en: 'Please drive slowly because the road is wet.', context: 'Adjective "slow" + -ly → "slowly"', note: 'Regular Adverb (-ly)' },
+            { en: 'My brother plays the guitar really well.', context: 'Irregular form of "good" → "well"', note: 'Irregular Adverb (good → well)' },
+            { en: 'The students answered all the questions easily.', context: 'Adjective ending in -y: "easy" → "easily"', note: 'Spelling Rule (-y → -ily)' },
+            { en: 'He runs very fast every morning in the park.', context: '"Fast" stays the same as an adjective and adverb', note: 'Irregular Adverb (fast → fast)' },
+            { en: 'They worked hard to finish their project on time.', context: '"Hard" means with great effort (not "hardly")', note: 'Irregular Adverb (hard → hard)' }
+          ],
+          exercises: [
+            {
+              id: 'm1',
+              prompt: 'Change the adjective in brackets into an adverb: "The turtle walks very __________ (slow)."',
+              placeholder: 'Type the adverb...',
+              answers: ['slowly'],
+              hint: 'Add -ly to the regular adjective "slow".',
+              displayAnswer: 'slowly'
+            },
+            {
+              id: 'm2',
+              prompt: 'Change the adjective in brackets into an adverb: "Maria sings __________ (beautiful) in the school choir."',
+              placeholder: 'Type the adverb...',
+              answers: ['beautifully'],
+              hint: 'Add -ly to "beautiful" (keep the double l).',
+              displayAnswer: 'beautifully'
+            },
+            {
+              id: 'm3',
+              prompt: 'Change the adjective in brackets into an adverb: "Carlos cooks Italian food really __________ (good)."',
+              placeholder: 'Type the adverb...',
+              answers: ['well'],
+              hint: '"Good" is an irregular adjective — think of its special adverb form.',
+              displayAnswer: 'well'
+            },
+            {
+              id: 'm4',
+              prompt: 'Change the adjective in brackets into an adverb: "Please read the instructions __________ (careful) before you start."',
+              placeholder: 'Type the adverb...',
+              answers: ['carefully'],
+              hint: 'Add -ly to the adjective "careful".',
+              displayAnswer: 'carefully'
+            },
+            {
+              id: 'm5',
+              prompt: 'Change the adjective in brackets into an adverb: "The children played __________ (happy) in the garden."',
+              placeholder: 'Type the adverb...',
+              answers: ['happily'],
+              hint: 'For adjectives ending in -y, change -y to -i and add -ly.',
+              displayAnswer: 'happily'
+            },
+            {
+              id: 'm6',
+              prompt: 'Change the adjective in brackets into an adverb: "Cheetahs can run extremely __________ (fast)."',
+              placeholder: 'Type the adverb...',
+              answers: ['fast'],
+              hint: 'This adverb is irregular and does not take -ly.',
+              displayAnswer: 'fast'
+            },
+            {
+              id: 'm7',
+              prompt: 'Change the adjective in brackets into an adverb: "The baby is sleeping, so please speak __________ (quiet)."',
+              placeholder: 'Type the adverb...',
+              answers: ['quietly'],
+              hint: 'Add -ly to the regular adjective "quiet".',
+              displayAnswer: 'quietly'
+            },
+            {
+              id: 'm8',
+              prompt: 'Change the adjective in brackets into an adverb: "Sarah passed the English test __________ (easy)."',
+              placeholder: 'Type the adverb...',
+              answers: ['easily'],
+              hint: 'For adjectives ending in -y, change -y to -i and add -ly.',
+              displayAnswer: 'easily'
+            },
+            {
+              id: 'm9',
+              prompt: 'Change the adjective in brackets into an adverb: "Our team trained __________ (hard) before the championship."',
+              placeholder: 'Type the adverb...',
+              answers: ['hard'],
+              hint: 'This irregular adverb does NOT take -ly and means "with a lot of effort".',
+              displayAnswer: 'hard'
+            }
+          ],
+          speakingPrompts: [
+            {
+              id: 'sp_m1',
+              title: 'Exercise 1: Clear Speech & Careful Driving',
+              prompt: 'Read aloud or produce a sentence using the regular adverbs "clearly" and "slowly".',
+              target: 'She speaks English very clearly, and her brother drives slowly on wet roads.',
+              keywords: ['speaks', 'english', 'clearly', 'brother', 'drives', 'slowly']
+            },
+            {
+              id: 'sp_m2',
+              title: 'Exercise 2: Irregular Adverbs (Well & Fast)',
+              prompt: 'Produce a sentence using the irregular adverbs "well" and "fast".',
+              target: 'My friend plays the guitar really well and runs very fast in the morning.',
+              keywords: ['friend', 'plays', 'guitar', 'well', 'runs', 'fast']
+            },
+            {
+              id: 'sp_m3',
+              title: 'Exercise 3: Spelling Rule (-y to -ily)',
+              prompt: 'Speak a sentence using "easily" and "happily" to describe students at school.',
+              target: 'The students finished their homework easily and played happily after class.',
+              keywords: ['students', 'finished', 'homework', 'easily', 'played', 'happily']
+            },
+            {
+              id: 'sp_m4',
+              title: 'Exercise 4: Quiet & Careful Habits',
+              prompt: 'Produce a polite sentence using "quietly" and "carefully" in a library context.',
+              target: 'In the library, people talk quietly and read their books very carefully.',
+              keywords: ['library', 'people', 'talk', 'quietly', 'read', 'carefully']
+            },
+            {
+              id: 'sp_m5',
+              title: 'Exercise 5: Working Hard for Success',
+              prompt: 'Describe someone working hard and singing beautifully using adverbs of manner.',
+              target: 'Maria practices every day, works hard, and sings beautifully on stage.',
+              keywords: ['practices', 'every', 'day', 'works', 'hard', 'sings', 'beautifully']
+            },
+            {
+              id: 'sp_m6',
+              title: 'Exercise 6: Adverbs of Manner Synthesis',
+              prompt: 'Synthesize regular (-ly) and irregular adverbs in a confident personal statement.',
+              target: 'When I listen carefully and practice hard, I can speak English well and naturally.',
+              keywords: ['listen', 'carefully', 'practice', 'hard', 'speak', 'english', 'well']
+            }
+          ]
+        },
+        {
+          id: 'frequency_adverbs',
+          num: 2,
+          shortTitle: '2. Adverbs of Frequency',
+          title: 'Module 2: Adverbs of Frequency (How Often We Do Things)',
+          cefrTag: 'CEFR A1–A2 Daily Routines & Habits',
+          meaning: 'Adverbs of frequency tell us HOW OFTEN an action happens, from 100% (always) to 0% (never): always (100%), usually (80%), often (60%), sometimes (40%), rarely (15%), never (0%).',
+          structure: 'Before main verbs: Subject + Adverb + Verb | After verb TO BE: Subject + am/is/are + Adverb',
+          neuralTip: 'Position Anchor: Remember the Golden Rule! Adverbs of frequency go BEFORE action verbs ("I always drink coffee"), but AFTER the verb "to be" ("She is always happy").',
+          examples: [
+            { en: 'I always brush my teeth before going to bed.', context: '100% frequency • Before main verb "brush"', note: 'Always (100%)' },
+            { en: 'She is usually early for her morning classes.', context: '80% frequency • After verb "to be" (is)', note: 'Usually + Verb To Be' },
+            { en: 'We often visit our grandparents on Sundays.', context: '60% frequency • Before main verb "visit"', note: 'Often (60%)' },
+            { en: 'They sometimes eat dinner at a local restaurant.', context: '40% frequency • Before main verb "eat"', note: 'Sometimes (40%)' },
+            { en: 'My father rarely watches television at night.', context: '15% frequency • Before main verb "watches"', note: 'Rarely (15%)' },
+            { en: 'He is never late for work.', context: '0% frequency • After verb "to be" (is) with positive verb', note: 'Never (0%) + Positive Verb' }
+          ],
+          exercises: [
+            {
+              id: 'f1',
+              prompt: 'Put the words in the correct order: "coffee / drinks / always / my mother / in the morning."',
+              placeholder: 'Write the complete sentence in the correct order...',
+              answers: [
+                'my mother always drinks coffee in the morning.',
+                'my mother always drinks coffee in the morning'
+              ],
+              hint: 'Place the frequency adverb BEFORE the main action verb "drinks".',
+              displayAnswer: 'My mother always drinks coffee in the morning.'
+            },
+            {
+              id: 'f2',
+              prompt: 'Put the words in the correct order: "late / is / never / Coach Carlos / for class."',
+              placeholder: 'Write the complete sentence in the correct order...',
+              answers: [
+                'coach carlos is never late for class.',
+                'coach carlos is never late for class'
+              ],
+              hint: 'Place the frequency adverb AFTER the verb "is".',
+              displayAnswer: 'Coach Carlos is never late for class.'
+            },
+            {
+              id: 'f3',
+              prompt: 'Complete with the right frequency adverb (0%): "I hate horror movies, so I __________ watch them."',
+              placeholder: 'Type the frequency adverb...',
+              answers: ['never'],
+              hint: 'Which frequency adverb means 0% of the time?',
+              displayAnswer: 'never'
+            },
+            {
+              id: 'f4',
+              prompt: 'Complete with the right frequency adverb (100%): "The sun __________ rises in the east."',
+              placeholder: 'Type the frequency adverb...',
+              answers: ['always'],
+              hint: 'Which frequency adverb means 100% of the time?',
+              displayAnswer: 'always'
+            },
+            {
+              id: 'f5',
+              prompt: 'Put the words in the correct order: "usually / we / take / the bus / to school."',
+              placeholder: 'Write the complete sentence in the correct order...',
+              answers: [
+                'we usually take the bus to school.',
+                'we usually take the bus to school'
+              ],
+              hint: 'Follow: Subject + frequency adverb + main verb.',
+              displayAnswer: 'We usually take the bus to school.'
+            },
+            {
+              id: 'f6',
+              prompt: 'Put the words in the correct order: "are / often / the students / tired / on Friday afternoons."',
+              placeholder: 'Write the complete sentence in the correct order...',
+              answers: [
+                'the students are often tired on friday afternoons.',
+                'the students are often tired on friday afternoons'
+              ],
+              hint: 'Place the frequency adverb AFTER the verb "are".',
+              displayAnswer: 'The students are often tired on Friday afternoons.'
+            },
+            {
+              id: 'f7',
+              prompt: 'Complete with the frequency adverb for ~40%: "I usually walk to work, but I __________ take a taxi when it rains."',
+              placeholder: 'Type the frequency adverb...',
+              answers: ['sometimes'],
+              hint: 'Which frequency adverb means around 40% of the time?',
+              displayAnswer: 'sometimes'
+            },
+            {
+              id: 'f8',
+              prompt: 'Choose the correct word order: "She __________ (rarely eats / eats rarely) fast food."',
+              placeholder: 'Type the correct option...',
+              answers: ['rarely eats'],
+              hint: 'Frequency adverbs come BEFORE main action verbs.',
+              displayAnswer: 'rarely eats'
+            },
+            {
+              id: 'f9',
+              prompt: 'Choose the correct word order: "They __________ (always are / are always) friendly to tourists."',
+              placeholder: 'Type the correct option...',
+              answers: ['are always'],
+              hint: 'Frequency adverbs come AFTER the verb "to be" (are).',
+              displayAnswer: 'are always'
+            }
+          ],
+          speakingPrompts: [
+            {
+              id: 'sp_f1',
+              title: 'Exercise 1: Morning Routine (Always & Usually)',
+              prompt: 'Speak about your morning routine using "always" before a verb and "usually" after "am".',
+              target: 'I always wake up at six o’clock, and I am usually ready for work by seven.',
+              keywords: ['always', 'wake', 'six', 'usually', 'ready', 'work']
+            },
+            {
+              id: 'sp_f2',
+              title: 'Exercise 2: Weekend Activities (Often & Sometimes)',
+              prompt: 'Describe weekend habits using "often" and "sometimes".',
+              target: 'We often visit our family on weekends, and we sometimes watch a movie together.',
+              keywords: ['often', 'visit', 'family', 'weekends', 'sometimes', 'watch', 'movie']
+            },
+            {
+              id: 'sp_f3',
+              title: 'Exercise 3: Healthy Habits (Rarely & Never)',
+              prompt: 'Produce a sentence about healthy lifestyle choices using "rarely" and "never".',
+              target: 'She rarely drinks soda and she never skips breakfast before school.',
+              keywords: ['rarely', 'drinks', 'soda', 'never', 'skips', 'breakfast']
+            },
+            {
+              id: 'sp_f4',
+              title: 'Exercise 4: Verb "To Be" Word Order',
+              prompt: 'Practice placing frequency adverbs AFTER "is" or "are" in a spoken sentence.',
+              target: 'Our teacher is always patient, and the lessons are never boring.',
+              keywords: ['teacher', 'is', 'always', 'patient', 'lessons', 'are', 'never']
+            },
+            {
+              id: 'sp_f5',
+              title: 'Exercise 5: Transportation & Study Habits',
+              prompt: 'Talk about how you travel and study English using "usually" and "often".',
+              target: 'I usually take the bus to class, and I often practice my pronunciation at home.',
+              keywords: ['usually', 'take', 'bus', 'class', 'often', 'practice', 'pronunciation']
+            },
+            {
+              id: 'sp_f6',
+              title: 'Exercise 6: Frequency Spectrum Synthesis',
+              prompt: 'Synthesize high and low frequency adverbs into a complete statement about your weekly routine.',
+              target: 'I always study English during the week, sometimes read books on Saturday, and am never lazy.',
+              keywords: ['always', 'study', 'english', 'sometimes', 'read', 'never', 'lazy']
+            }
+          ]
+        },
+        {
+          id: 'time_place_degree',
+          num: 3,
+          shortTitle: '3. Time, Place & Degree',
+          title: 'Module 3: Adverbs of Time, Place, and Degree',
+          cefrTag: 'CEFR A1–A2 Sentence Completeness & Intensity',
+          meaning: 'Adverbs of TIME tell us WHEN (today, yesterday, now, soon). Adverbs of PLACE tell us WHERE (here, there, outside, upstairs). Adverbs of DEGREE tell us HOW MUCH or intensity (very, really, quite, too).',
+          structure: 'Degree: very/really + Adjective or Adverb | Place & Time: Subject + Verb + Place + Time',
+          neuralTip: 'Place-Before-Time Rule: At the end of a sentence, put WHERE (Place) before WHEN (Time): "I studied here (Place) yesterday (Time)." Put degree words ("very", "really") directly BEFORE the word they modify!',
+          examples: [
+            { en: 'The weather is very cold today.', context: 'Degree ("very" before "cold") + Time ("today")', note: 'Degree + Time' },
+            { en: 'Please come here right now!', context: 'Place ("here") + Time ("right now")', note: 'Place before Time' },
+            { en: 'The children are playing outside in the yard.', context: 'Place ("outside") tells us where', note: 'Adverb of Place' },
+            { en: 'We visited the museum yesterday.', context: 'Time ("yesterday") tells us when', note: 'Adverb of Time' },
+            { en: 'This coffee is too hot to drink.', context: 'Degree ("too" = more than wanted)', note: 'Adverb of Degree (too)' },
+            { en: 'She speaks English quite well for a beginner.', context: 'Degree ("quite") modifies adverb ("well")', note: 'Degree + Manner Adverb' }
+          ],
+          exercises: [
+            {
+              id: 'tpd1',
+              prompt: 'Identify and type the adverb of TIME: "We have an important English exam tomorrow."',
+              placeholder: 'Type the adverb of time...',
+              answers: ['tomorrow'],
+              hint: 'Which word in the sentence tells us WHEN the exam happens?',
+              displayAnswer: 'tomorrow'
+            },
+            {
+              id: 'tpd2',
+              prompt: 'Identify and type the adverb of PLACE: "It is raining, so let’s go inside."',
+              placeholder: 'Type the adverb of place...',
+              answers: ['inside'],
+              hint: 'Which word in the sentence tells us WHERE to go?',
+              displayAnswer: 'inside'
+            },
+            {
+              id: 'tpd3',
+              prompt: 'Complete with an adverb of DEGREE: "This suitcase is __________ heavy; I cannot lift it!" (more than possible)',
+              placeholder: 'Type the adverb of degree...',
+              answers: ['too'],
+              hint: 'Use the 3-letter degree adverb meaning "excessively" or "more than wanted".',
+              displayAnswer: 'too'
+            },
+            {
+              id: 'tpd4',
+              prompt: 'Put in the correct order (Place before Time): "worked / yesterday / here / they."',
+              placeholder: 'Write the complete sentence in the correct order...',
+              answers: [
+                'they worked here yesterday.',
+                'they worked here yesterday'
+              ],
+              hint: 'Follow: Subject + Verb + Place + Time.',
+              displayAnswer: 'They worked here yesterday.'
+            },
+            {
+              id: 'tpd5',
+              prompt: 'Complete with the adverb of TIME for the present moment: "Coach Carlos is teaching the class __________."',
+              placeholder: 'Type the adverb of time...',
+              answers: ['now', 'right now'],
+              hint: 'Use the 3-letter adverb of time meaning "at this moment".',
+              displayAnswer: 'now'
+            },
+            {
+              id: 'tpd6',
+              prompt: 'Put the words in the correct order: "is / very / that movie / interesting."',
+              placeholder: 'Write the complete sentence in the correct order...',
+              answers: [
+                'that movie is very interesting.',
+                'that movie is very interesting'
+              ],
+              hint: 'Place the degree adverb directly before the adjective it modifies.',
+              displayAnswer: 'That movie is very interesting.'
+            },
+            {
+              id: 'tpd7',
+              prompt: 'Identify and type the adverb of PLACE: "My bedroom is upstairs on the second floor."',
+              placeholder: 'Type the adverb of place...',
+              answers: ['upstairs'],
+              hint: 'Which word in the sentence tells us WHERE the bedroom is?',
+              displayAnswer: 'upstairs'
+            },
+            {
+              id: 'tpd8',
+              prompt: 'Put in the correct order (Place before Time): "going / there / are / we / tomorrow."',
+              placeholder: 'Write the complete sentence in the correct order...',
+              answers: [
+                'we are going there tomorrow.',
+                'we are going there tomorrow'
+              ],
+              hint: 'Remember the rule: Place comes before Time at the end of a sentence.',
+              displayAnswer: 'We are going there tomorrow.'
+            },
+            {
+              id: 'tpd9',
+              prompt: 'Complete with an adverb of DEGREE: "Thank you so much! Your explanation was __________ helpful."',
+              placeholder: 'Type an adverb of degree...',
+              answers: ['very', 'really', 'extremely', 'quite'],
+              hint: 'Use a common intensifier (adverb of degree) before the adjective "helpful".',
+              displayAnswer: 'really'
+            }
+          ],
+          speakingPrompts: [
+            {
+              id: 'sp_tpd1',
+              title: 'Exercise 1: Place Before Time Production',
+              prompt: 'Read aloud or produce a sentence placing "here" (Place) before "yesterday" (Time).',
+              target: 'We arrived here yesterday and started our new English course right away.',
+              keywords: ['arrived', 'here', 'yesterday', 'started', 'english', 'course']
+            },
+            {
+              id: 'sp_tpd2',
+              title: 'Exercise 2: Degree Adverbs (Very & Too)',
+              prompt: 'Produce a sentence describing the weather or a drink using "very" and "too".',
+              target: 'It is very sunny outside today, and my tea is too hot to drink.',
+              keywords: ['very', 'sunny', 'outside', 'today', 'tea', 'too', 'hot']
+            },
+            {
+              id: 'sp_tpd3',
+              title: 'Exercise 3: Location Words (Upstairs & Outside)',
+              prompt: 'Speak about where people are using the place adverbs "upstairs" and "outside".',
+              target: 'My parents are talking downstairs while the children are playing outside.',
+              keywords: ['parents', 'talking', 'while', 'children', 'playing', 'outside']
+            },
+            {
+              id: 'sp_tpd4',
+              title: 'Exercise 4: Future & Past Time Markers',
+              prompt: 'Contrast yesterday and tomorrow in a clear spoken sentence.',
+              target: 'Yesterday I studied at home, and tomorrow I am going there again.',
+              keywords: ['yesterday', 'studied', 'home', 'tomorrow', 'going', 'there']
+            },
+            {
+              id: 'sp_tpd5',
+              title: 'Exercise 5: Combining Degree + Manner',
+              prompt: 'Use "really" or "quite" to modify an adverb of manner in a spoken sentence.',
+              target: 'She learns new vocabulary really fast and pronounces words quite clearly.',
+              keywords: ['learns', 'vocabulary', 'really', 'fast', 'pronounces', 'quite', 'clearly']
+            },
+            {
+              id: 'sp_tpd6',
+              title: 'Exercise 6: Time, Place & Degree Synthesis',
+              prompt: 'Synthesize degree, place, and time adverbs into one smooth A2 sentence.',
+              target: 'The new museum is really big, and we are going there tomorrow morning.',
+              keywords: ['museum', 'really', 'big', 'going', 'there', 'tomorrow', 'morning']
+            }
+          ]
+        }
+      ];
+
+      let state = {
+        activeModuleId: 'manner_adverbs',
+        answers: {},
+        transcripts: {}
+      };
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') {
+            state = { ...state, ...parsed };
+          }
+        }
+      } catch (e) { /* sandbox safe */ }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) { /* sandbox safe */ }
+      }
+
+      function showToast(msg) {
+        const el = document.getElementById('toast-banner');
+        el.textContent = msg;
+        el.classList.remove('hidden');
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => el.classList.add('hidden'), 3200);
+      }
+
+      let availableVoices = [];
+      function populateVoices() {
+        const select = document.getElementById('voice-select');
+        if (!('speechSynthesis' in window)) {
+          select.innerHTML = '<option>TTS Unavailable</option>';
+          return;
+        }
+        const voices = window.speechSynthesis.getVoices() || [];
+        const usVoices = voices.filter(v => /en[-_]?US/i.test(v.lang));
+        const enVoices = usVoices.length ? usVoices : voices.filter(v => /^en/i.test(v.lang));
+        availableVoices = enVoices.length ? enVoices : voices;
+
+        select.innerHTML = '';
+        if (!availableVoices.length) {
+          const opt = document.createElement('option');
+          opt.textContent = 'en-US Default';
+          select.appendChild(opt);
+          return;
+        }
+        availableVoices.forEach((v, idx) => {
+          const opt = document.createElement('option');
+          opt.value = String(idx);
+          opt.textContent = v.name.replace(/Microsoft |Google /g, '');
+          if (/en[-_]?US/i.test(v.lang) && /natural|jenny|aria|guy|samantha|google us/i.test(v.name.toLowerCase())) {
+            opt.selected = true;
+          }
+          select.appendChild(opt);
+        });
+      }
+
+      if ('speechSynthesis' in window) {
+        populateVoices();
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+
+      function speakText(text) {
+        if (!('speechSynthesis' in window)) {
+          showToast('Speech synthesis is not supported in this browser.');
+          return;
+        }
+        if (!availableVoices.length) {
+          populateVoices();
+        }
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US';
+        const voiceSelect = document.getElementById('voice-select');
+        const rateSelect = document.getElementById('rate-select');
+        const idx = parseInt(voiceSelect.value, 10);
+        if (!isNaN(idx) && availableVoices[idx]) {
+          utter.voice = availableVoices[idx];
+        }
+        utter.rate = parseFloat(rateSelect.value) || 0.95;
+        window.speechSynthesis.speak(utter);
+      }
+
+      let activeRecognition = null;
+      let activeMicPromptId = null;
+
+      function normalizeText(str) {
+        return (str || '')
+          .toLowerCase()
+          .replace(/[’']/g, "'")
+          .replace(/[^a-z0-9'\s]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function evaluateSpeech(promptObj, spokenText) {
+        const normSpoken = normalizeText(spokenText);
+        if (!normSpoken) {
+          return {
+            score: 0,
+            matched: [],
+            missing: promptObj.keywords,
+            message: 'Speak into your microphone or type your spoken response to receive neural feedback.'
+          };
+        }
+        const words = new Set(normSpoken.split(' '));
+        const matched = promptObj.keywords.filter(k => words.has(k.toLowerCase()));
+        const missing = promptObj.keywords.filter(k => !words.has(k.toLowerCase()));
+        const score = Math.round((matched.length / promptObj.keywords.length) * 100);
+
+        let message = '';
+        if (score >= 85) {
+          message = 'Excellent oral production! Target adverbs and key vocabulary were clearly recognized.';
+        } else if (score >= 50) {
+          message = 'Good attempt! Try articulating the missing target words clearly: ' + missing.join(', ') + '.';
+        } else {
+          message = 'Keep practicing! Listen to the American English model again and focus on: ' + missing.join(', ') + '.';
+        }
+        return { score, matched, missing, message };
+      }
+
+      function toggleSpeechRecognition(promptObj) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          showToast('Live SpeechRecognition is unavailable here — you can type in the transcription box and click Evaluate!');
+          return;
+        }
+        if (activeRecognition && activeMicPromptId === promptObj.id) {
+          try { activeRecognition.stop(); } catch (e) {}
+          activeRecognition = null;
+          activeMicPromptId = null;
+          render();
+          return;
+        }
+        if (activeRecognition) {
+          try { activeRecognition.abort(); } catch (e) {}
+          activeRecognition = null;
+          activeMicPromptId = null;
+        }
+        try {
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+          const rec = new SpeechRec();
+          rec.lang = 'en-US';
+          rec.interimResults = true;
+          // Mobile Chrome/Safari duplicate cumulative segments when continuous=true
+          rec.continuous = !isMobile;
+          rec.maxAlternatives = 1;
+
+          // Clear previous transcript on new recording session to avoid concatenation/duplication
+          state.transcripts[promptObj.id] = '';
+          saveState();
+
+          let committedSegments = [];
+          let lastFinalNormalized = '';
+
+          activeRecognition = rec;
+          activeMicPromptId = promptObj.id;
+          render();
+
+          rec.onresult = (event) => {
+            let interimText = '';
+            const startIdx = typeof event.resultIndex === 'number' ? event.resultIndex : 0;
+
+            for (let i = startIdx; i < event.results.length; i++) {
+              const result = event.results[i];
+              const transcript = (result[0] && result[0].transcript ? result[0].transcript : '').trim();
+              if (!transcript) continue;
+
+              if (result.isFinal) {
+                const normSeg = transcript.toLowerCase().replace(/\s+/g, ' ');
+                // Deduplicate identical consecutive segments emitted by mobile Web Speech engines
+                if (normSeg !== lastFinalNormalized) {
+                  // On mobile, if the new final result already encompasses the prior committed text, replace instead of appending
+                  const joinedSoFar = committedSegments.join(' ').toLowerCase().replace(/\s+/g, ' ');
+                  if (joinedSoFar && normSeg.startsWith(joinedSoFar)) {
+                    committedSegments = [transcript];
+                  } else {
+                    committedSegments.push(transcript);
+                  }
+                  lastFinalNormalized = normSeg;
+                }
+              } else {
+                interimText = transcript;
+              }
+            }
+
+            const combined = [...committedSegments, interimText].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+            state.transcripts[promptObj.id] = combined;
+            saveState();
+
+            const box = document.getElementById('transcript-box-' + promptObj.id);
+            if (box) box.value = combined;
+            updateSpeechFeedbackDOM(promptObj);
+          };
+
+          rec.onerror = (event) => {
+            if (event && event.error === 'aborted') return;
+            activeRecognition = null;
+            activeMicPromptId = null;
+            showToast('Microphone access was blocked or unavailable. You can still type in the transcription box to test feedback.');
+            render();
+          };
+
+          rec.onend = () => {
+            if (activeRecognition === rec) {
+              activeRecognition = null;
+              activeMicPromptId = null;
+              render();
+            }
+          };
+
+          rec.start();
+        } catch (err) {
+          activeRecognition = null;
+          activeMicPromptId = null;
+          showToast('Could not start microphone. Type in the transcription box to evaluate.');
+          render();
+        }
+      }
+
+      function updateSpeechFeedbackDOM(promptObj) {
+        const feedbackEl = document.getElementById('speech-feedback-' + promptObj.id);
+        if (!feedbackEl) return;
+        const spoken = state.transcripts[promptObj.id] || '';
+        const res = evaluateSpeech(promptObj, spoken);
+        const isGood = res.score >= 85;
+        feedbackEl.className = 'mt-3 p-3.5 rounded-xl border text-sm transition ' +
+          (spoken ? (isGood ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : 'bg-amber-50 border-amber-300 text-amber-900') : 'bg-slate-50 border-slate-200 text-slate-600');
+        feedbackEl.innerHTML = `
+          <div class="flex items-center justify-between gap-2 font-bold mb-1">
+            <span>Neural Pronunciation &amp; Grammar Check</span>
+            <span>${res.score}% Match</span>
+          </div>
+          <p class="text-xs leading-relaxed">${res.message}</p>
+          ${res.matched.length ? `<div class="mt-2 flex flex-wrap gap-1">${res.matched.map(w => `<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">✓ ${w}</span>`).join('')}</div>` : ''}
+        `;
+      }
+
+      function normalizeAnswer(str) {
+        return (str || '')
+          .toLowerCase()
+          .replace(/[’']/g, "'")
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function checkExercise(exId, mod) {
+        const ex = mod.exercises.find(e => e.id === exId);
+        if (!ex) return;
+        const input = document.getElementById('input-' + exId);
+        const val = input ? input.value : '';
+        const norm = normalizeAnswer(val);
+        const isCorrect = ex.answers.some(a => normalizeAnswer(a) === norm);
+
+        state.answers[exId] = {
+          value: val,
+          status: norm === '' ? 'idle' : (isCorrect ? 'correct' : 'wrong')
+        };
+        saveState();
+        updateGlobalScore();
+        renderExerciseRow(ex, mod);
+      }
+
+      function updateGlobalScore() {
+        const total = MODULES.reduce((sum, m) => sum + m.exercises.length, 0);
+        const correct = Object.values(state.answers).filter(a => a && a.status === 'correct').length;
+        const gs = document.getElementById('global-score');
+        const gt = document.getElementById('global-total');
+        const gsm = document.getElementById('global-score-mobile');
+        const gtm = document.getElementById('global-total-mobile');
+        if (gs) gs.textContent = String(correct);
+        if (gt) gt.textContent = String(total);
+        if (gsm) gsm.textContent = String(correct);
+        if (gtm) gtm.textContent = String(total);
+      }
+
+      function renderTabs() {
+        const nav = document.getElementById('module-tabs');
+        nav.innerHTML = '';
+        MODULES.forEach(m => {
+          const doneCount = m.exercises.filter(e => state.answers[e.id]?.status === 'correct').length;
+          const active = m.id === state.activeModuleId;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 border ' +
+            (active
+              ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50');
+          btn.innerHTML = `<span>${m.shortTitle}</span><span class="px-1.5 py-0.5 rounded-md text-[11px] ${active ? 'bg-indigo-500 text-white' : 'bg-slate-100 text-slate-600'}">${doneCount}/${m.exercises.length}</span>`;
+          btn.addEventListener('click', () => {
+            state.activeModuleId = m.id;
+            saveState();
+            render();
+          });
+          nav.appendChild(btn);
+          if (active) {
+            requestAnimationFrame(() => {
+              btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+          }
+        });
+      }
+
+      function renderExerciseRow(ex, mod) {
+        const card = document.getElementById('ex-card-' + ex.id);
+        if (!card) return;
+        const entry = state.answers[ex.id] || { value: '', status: 'idle' };
+        const statusCol = card.querySelector('.pink-status-col');
+        const statusText = card.querySelector('.status-label');
+        const audioSlot = card.querySelector('.model-audio-slot');
+        statusCol.classList.remove('is-correct', 'is-wrong');
+        if (entry.status === 'correct') {
+          statusCol.classList.add('is-correct');
+          statusText.textContent = '✓ Correct! Neural link reinforced.';
+          if (audioSlot) {
+            audioSlot.innerHTML = `
+              <span class="text-[11px] opacity-80 font-medium">Model Audio</span>
+              <button type="button" data-speak="${ex.displayAnswer.replace(/"/g, '&quot;')}" class="speak-ex-btn px-2.5 py-1 rounded-lg bg-white/80 hover:bg-white text-slate-800 text-xs font-bold shadow-sm transition">
+                🔊 Listen
+              </button>
+            `;
+            const btn = audioSlot.querySelector('.speak-ex-btn');
+            if (btn) btn.addEventListener('click', () => speakText(btn.getAttribute('data-speak')));
+          }
+        } else if (entry.status === 'wrong') {
+          statusCol.classList.add('is-wrong');
+          statusText.textContent = '✗ Not quite. Try again or check the hint.';
+          if (audioSlot) {
+            audioSlot.innerHTML = `
+              <span class="text-[11px] opacity-80 font-medium">Model Audio</span>
+              <span class="text-[11px] font-semibold opacity-75">🔒 Solve to unlock</span>
+            `;
+          }
+        } else {
+          statusText.textContent = 'Pending — Answer to turn green';
+          if (audioSlot) {
+            audioSlot.innerHTML = `
+              <span class="text-[11px] opacity-80 font-medium">Model Audio</span>
+              <span class="text-[11px] font-semibold opacity-75">🔒 Solve to unlock</span>
+            `;
+          }
+        }
+      }
+
+      function render() {
+        renderTabs();
+        updateGlobalScore();
+
+        const mod = MODULES.find(m => m.id === state.activeModuleId) || MODULES[0];
+        const main = document.getElementById('app-main');
+
+        main.innerHTML = `
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 mb-2">${mod.cefrTag}</span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">${mod.title}</h2>
+              </div>
+              <button type="button" id="speak-rule-btn" class="px-3.5 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs sm:text-sm flex items-center gap-2 transition">
+                <span>🔊</span> Listen to Explanation
+              </button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Meaning &amp; Use</div>
+                <p class="text-sm text-slate-800 leading-relaxed">${mod.meaning}</p>
+              </div>
+              <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">Core Structure</div>
+                <p class="text-sm font-bold text-indigo-950 leading-relaxed">${mod.structure}</p>
+                <p class="text-xs text-indigo-700 mt-2"><strong>🧠 Neural Tip:</strong> ${mod.neuralTip}</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-extrabold text-slate-900">Guided Examples (${mod.examples.length} Models)</h3>
+                <p class="text-xs text-slate-500">Click the speaker button on any card to hear the native American English narrator and shadow aloud.</p>
+              </div>
+              <button type="button" id="play-all-examples-btn" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+                ▶ Play First 3
+              </button>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              ${mod.examples.map((ex, idx) => `
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:shadow-sm transition flex flex-col justify-between gap-3">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-700">Example ${idx + 1}</span>
+                      <button type="button" data-speak="${ex.en.replace(/"/g, '&quot;')}" class="speak-ex-btn w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-indigo-400 hover:text-indigo-600 flex items-center justify-center text-sm shadow-sm transition" title="Listen in American English">
+                        🔊
+                      </button>
+                    </div>
+                    <p class="text-sm font-semibold text-slate-900 leading-snug">${ex.en}</p>
+                    <p class="text-xs text-slate-500 mt-1">${ex.context}</p>
+                  </div>
+                  <div class="text-[11px] font-medium text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100">
+                    ${ex.note}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-extrabold text-slate-900">Active Recall Practice (${mod.exercises.length} Exercises)</h3>
+                <p class="text-xs text-slate-500">Recall the answer from memory, type it in, and click <strong>Check</strong>. The pink status column turns <strong>green</strong> when your answer is accurate.</p>
+              </div>
+              <button type="button" id="check-all-btn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm transition">
+                Check All Answers
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              ${mod.exercises.map((ex, idx) => {
+                const saved = state.answers[ex.id] || { value: '', status: 'idle' };
+                const statusClass = saved.status === 'correct' ? 'is-correct' : (saved.status === 'wrong' ? 'is-wrong' : '');
+                const statusLabel = saved.status === 'correct'
+                  ? '✓ Correct! Neural link reinforced.'
+                  : (saved.status === 'wrong' ? '✗ Not quite. Try again or check the hint.' : 'Pending — Answer to turn green');
+                const audioHtml = saved.status === 'correct'
+                  ? `<span class="text-[11px] opacity-80 font-medium">Model Audio</span>
+                     <button type="button" data-speak="${ex.displayAnswer.replace(/"/g, '&quot;')}" class="speak-ex-btn px-2.5 py-1 rounded-lg bg-white/80 hover:bg-white text-slate-800 text-xs font-bold shadow-sm transition">
+                       🔊 Listen
+                     </button>`
+                  : `<span class="text-[11px] opacity-80 font-medium">Model Audio</span>
+                     <span class="text-[11px] font-semibold opacity-75">🔒 Solve to unlock</span>`;
+
+                return `
+                  <div id="ex-card-${ex.id}" class="grid md:grid-cols-12 gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50/50 items-center">
+                    <div class="md:col-span-8 space-y-2">
+                      <div class="text-xs font-bold text-slate-500">Exercise ${idx + 1}</div>
+                      <p class="text-sm font-semibold text-slate-900">${ex.prompt}</p>
+                      <div class="flex flex-col sm:flex-row flex-wrap gap-2">
+                        <input
+                          id="input-${ex.id}"
+                          data-ex-input="${ex.id}"
+                          type="text"
+                          autocomplete="off"
+                          autocorrect="off"
+                          autocapitalize="none"
+                          spellcheck="false"
+                          enterkeyhint="done"
+                          value="${(saved.value || '').replace(/"/g, '&quot;')}"
+                          placeholder="${ex.placeholder}"
+                          class="w-full sm:flex-1 sm:min-w-[200px] px-3.5 py-2.5 min-h-[44px] rounded-lg border border-slate-300 bg-white text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        />
+                        <div class="grid grid-cols-2 sm:flex gap-2">
+                          <button type="button" data-check="${ex.id}" class="check-one-btn px-3.5 py-2.5 min-h-[44px] rounded-lg bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white text-xs font-bold transition">
+                            Check
+                          </button>
+                          <button type="button" data-hint="${ex.id}" class="hint-btn px-3 py-2.5 min-h-[44px] rounded-lg border border-slate-300 bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-700 text-xs font-semibold transition">
+                            Hint
+                          </button>
+                        </div>
+                      </div>
+                      <div id="hint-box-${ex.id}" class="hidden text-xs text-indigo-700 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-200">
+                        💡 ${ex.hint}
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-4 pink-status-col ${statusClass} border-2 rounded-xl p-3 flex flex-col justify-between gap-2 min-h-[82px]">
+                      <div class="text-xs font-bold status-label">${statusLabel}</div>
+                      <div class="flex items-center justify-between gap-2 model-audio-slot">
+                        ${audioHtml}
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-6">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-700 mb-1">🎙️ Neural Speech Recognition Lab</span>
+              <h3 class="text-lg font-extrabold text-slate-900">Oral Production &amp; Transcription Feedback (6 Guided Speaking Exercises)</h3>
+              <p class="text-xs text-slate-600 mt-0.5">Practice speaking each target sentence aloud using the microphone or typing your response to receive instant American English pronunciation and grammar scoring.</p>
+            </div>
+
+            <div class="space-y-6">
+              ${mod.speakingPrompts.map((sp) => {
+                const isListening = activeRecognition && activeMicPromptId === sp.id;
+                return `
+                  <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h4 class="text-sm font-extrabold text-slate-900">${sp.title}</h4>
+                      <button type="button" data-speak-target="${sp.target.replace(/"/g, '&quot;')}" class="speak-target-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition flex items-center gap-1.5">
+                        🔊 Hear Target Sentence
+                      </button>
+                    </div>
+
+                    <p class="text-xs text-slate-700 font-medium">${sp.prompt}</p>
+
+                    <div class="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs sm:text-sm font-semibold text-indigo-950">
+                      "${sp.target}"
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5">
+                      <button type="button" data-mic-id="${sp.id}" class="mic-toggle-btn w-full sm:w-auto justify-center px-4 py-2.5 min-h-[44px] rounded-xl font-bold text-xs sm:text-sm text-white flex items-center gap-2 transition ${isListening ? 'bg-rose-600 speaking-pulse' : 'bg-rose-500 hover:bg-rose-600 active:bg-rose-700'}">
+                        <span>${isListening ? '⏹ Stop Listening' : '🎙️ Start Speaking'}</span>
+                      </button>
+                      <div class="grid grid-cols-2 sm:flex gap-2.5">
+                        <button type="button" data-eval-id="${sp.id}" class="eval-speech-btn justify-center px-3.5 py-2.5 min-h-[44px] rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-slate-950 text-white text-xs font-bold transition">
+                          Evaluate
+                        </button>
+                        <button type="button" data-clear-id="${sp.id}" class="clear-speech-btn justify-center px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-100 active:bg-slate-200 text-xs font-semibold transition">
+                          Clear
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="transcript-box-${sp.id}" class="block text-[11px] font-bold text-slate-600 mb-1">
+                        Live Transcription Box (editable):
+                      </label>
+                      <textarea
+                        id="transcript-box-${sp.id}"
+                        rows="2"
+                        placeholder="Your spoken English will appear here..."
+                        class="w-full p-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"
+                      >${state.transcripts[sp.id] || ''}</textarea>
+                    </div>
+
+                    <div id="speech-feedback-${sp.id}"></div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        `;
+
+        document.getElementById('speak-rule-btn').addEventListener('click', () => {
+          speakText(mod.title + '. ' + mod.meaning + ' Structure: ' + mod.structure);
+        });
+
+        document.getElementById('play-all-examples-btn').addEventListener('click', () => {
+          const text = mod.examples.slice(0, 3).map(e => e.en).join(' ... ');
+          speakText(text);
+        });
+
+        main.querySelectorAll('.speak-ex-btn').forEach(btn => {
+          btn.addEventListener('click', () => speakText(btn.getAttribute('data-speak')));
+        });
+
+        main.querySelectorAll('.check-one-btn').forEach(btn => {
+          btn.addEventListener('click', () => checkExercise(btn.getAttribute('data-check'), mod));
+        });
+
+        main.querySelectorAll('[data-ex-input]').forEach(inp => {
+          inp.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              checkExercise(inp.getAttribute('data-ex-input'), mod);
+            }
+          });
+        });
+
+        document.getElementById('check-all-btn').addEventListener('click', () => {
+          mod.exercises.forEach(ex => checkExercise(ex.id, mod));
+          showToast('Checked all exercises in ' + mod.shortTitle + '!');
+        });
+
+        main.querySelectorAll('.hint-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const box = document.getElementById('hint-box-' + btn.getAttribute('data-hint'));
+            if (box) box.classList.toggle('hidden');
+          });
+        });
+
+        main.querySelectorAll('.speak-target-btn').forEach(btn => {
+          btn.addEventListener('click', () => speakText(btn.getAttribute('data-speak-target')));
+        });
+
+        main.querySelectorAll('.mic-toggle-btn').forEach(btn => {
+          const spId = btn.getAttribute('data-mic-id');
+          const spObj = mod.speakingPrompts.find(s => s.id === spId);
+          if (spObj) {
+            btn.addEventListener('click', () => toggleSpeechRecognition(spObj));
+          }
+        });
+
+        main.querySelectorAll('.eval-speech-btn').forEach(btn => {
+          const spId = btn.getAttribute('data-eval-id');
+          const spObj = mod.speakingPrompts.find(s => s.id === spId);
+          if (spObj) {
+            btn.addEventListener('click', () => {
+              const box = document.getElementById('transcript-box-' + spId);
+              state.transcripts[spId] = box ? box.value : '';
+              saveState();
+              updateSpeechFeedbackDOM(spObj);
+            });
+          }
+        });
+
+        main.querySelectorAll('.clear-speech-btn').forEach(btn => {
+          const spId = btn.getAttribute('data-clear-id');
+          const spObj = mod.speakingPrompts.find(s => s.id === spId);
+          if (spObj) {
+            btn.addEventListener('click', () => {
+              state.transcripts[spId] = '';
+              saveState();
+              const box = document.getElementById('transcript-box-' + spId);
+              if (box) box.value = '';
+              updateSpeechFeedbackDOM(spObj);
+            });
+          }
+        });
+
+        mod.speakingPrompts.forEach(sp => {
+          const tBox = document.getElementById('transcript-box-' + sp.id);
+          if (tBox) {
+            tBox.addEventListener('input', () => {
+              state.transcripts[sp.id] = tBox.value;
+              saveState();
+            });
+          }
+          updateSpeechFeedbackDOM(sp);
+        });
+      }
+
+      document.getElementById('reset-progress-btn').addEventListener('click', () => {
+        state.answers = {};
+        state.transcripts = {};
+        saveState();
+        render();
+        showToast('All A1–A2 module progress has been reset.');
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
