@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Lección Neural — Past Simple Passive &amp; Verbs | By Coach Carlos O.</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #fdf2f8 100%);
+      color: #0f172a;
+    }
+    .pink-status-col {
+      background-color: #ffe4e6;
+      border-color: #fda4af;
+      color: #9f1239;
+      transition: all 0.25s ease;
+    }
+    .pink-status-col.is-correct {
+      background-color: #dcfce7;
+      border-color: #22c55e;
+      color: #166534;
+    }
+    .pink-status-col.is-wrong {
+      background-color: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+    .speaking-pulse {
+      animation: pulseRing 1.4s infinite;
+    }
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-rose-500 text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+          SLN
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">
+            Super Lección Neural — Past Simple Passive &amp; Verbs
+          </h1>
+          <p class="text-xs text-slate-500 font-medium">
+            EasyEnglishEducation • By Coach Carlos O. • Neuroeducation &amp; Active Recall
+          </p>
+        </div>
+      </div>
+
+      <!-- Global TTS & Progress Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1.5 rounded-lg border border-slate-200">
+          <span class="text-xs font-semibold text-slate-600">🇺🇸 Voice:</span>
+          <select id="voice-select" class="text-xs bg-transparent font-medium text-slate-800 focus:outline-none max-w-[150px]"></select>
+          <select id="rate-select" class="text-xs bg-white border border-slate-200 rounded px-1.5 py-0.5 font-semibold text-slate-700">
+            <option value="0.8">0.8x</option>
+            <option value="0.95" selected>1.0x</option>
+            <option value="1.15">1.15x</option>
+          </select>
+        </div>
+        <div class="bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-lg text-xs font-bold text-indigo-700">
+          Mastery: <span id="global-score">0</span> / <span id="global-total">18</span>
+        </div>
+        <button id="reset-progress-btn" type="button" class="text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 transition">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- Module Tabs -->
+    <nav class="max-w-6xl mx-auto px-4 pb-2.5 flex gap-2 overflow-x-auto" id="module-tabs" aria-label="Grammar Modules"></nav>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast-banner" class="fixed bottom-4 right-4 z-50 hidden max-w-sm bg-slate-900 text-white text-sm font-medium px-4 py-3 rounded-xl shadow-lg"></div>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-1 space-y-6" id="app-main"></main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white/80 py-4 text-center text-xs text-slate-500">
+    © Developed for educational excellence By Coach Carlos O. • EasyEnglishEducation
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'super_leccion_neural_passives_verbs_v2';
+
+      const MODULES = [
+        {
+          id: 'past_passive',
+          num: 1,
+          shortTitle: '1. Past Simple Passive',
+          title: 'Module 1: Past Simple Passive (Was / Were + Past Participle)',
+          cefrTag: 'B1/B2 Inventions & Historical Focus',
+          meaning: 'We use the passive voice when the action or invention is more important than the person who performed it.',
+          structure: 'Singular: was + past participle | Plural: were + past participle (+ by + inventor/agent)',
+          neuralTip: 'Dual Coding & Active Recall: Put the invention or object first in your mental spotlight. Check if it is singular (was) or plural (were), then add the past participle.',
+          examples: [
+            { en: 'The dishwasher was invented by Josephine Cochrane.', es: 'El lavavajillas fue inventado por Josephine Cochrane.', note: 'Singular Passive (was + invented)' },
+            { en: 'Windscreen wipers were invented by Mary Anderson.', es: 'Los limpiaparabrisas fueron inventados por Mary Anderson.', note: 'Plural Passive (were + invented)' },
+            { en: 'The video entry phone was developed in 1966.', es: 'El videoportero fue desarrollado en 1966.', note: 'Singular Passive + year (was + developed)' },
+            { en: 'Four life rafts were used on the Titanic.', es: 'Se utilizaron cuatro balsas salvavidas en el Titanic.', note: 'Plural Passive (were + used)' },
+            { en: 'The disposable nappy was patented by Marion Donovan in 1951.', es: 'El pañal desechable fue patentado por Marion Donovan en 1951.', note: 'Singular Passive (was + patented)' },
+            { en: 'Early solar-heated houses were designed using innovative thermal storage.', es: 'Las primeras casas con calefacción solar fueron diseñadas usando almacenamiento térmico innovador.', note: 'Plural Passive (were + designed)' }
+          ],
+          exercises: [
+            {
+              id: 'pp1',
+              prompt: 'Complete using was or were and the past participle: "The disposable nappy __________ (invent) by Marion Donovan."',
+              placeholder: 'Type was/were + past participle...',
+              answers: ['was invented'],
+              hint: '"The disposable nappy" is singular → use "was" + past participle of "invent".',
+              displayAnswer: 'was invented'
+            },
+            {
+              id: 'pp2',
+              prompt: 'Complete using was or were and the past participle: "The first solar-heated house __________ (design) by Maria Telkes."',
+              placeholder: 'Type was/were + past participle...',
+              answers: ['was designed'],
+              hint: '"The first solar-heated house" is singular → use "was" + past participle of "design".',
+              displayAnswer: 'was designed'
+            },
+            {
+              id: 'pp3',
+              prompt: 'Complete using was or were and the past participle: "Four life rafts __________ (use) on the Titanic."',
+              placeholder: 'Type was/were + past participle...',
+              answers: ['were used'],
+              hint: '"Four life rafts" is plural → use "were" + past participle of "use".',
+              displayAnswer: 'were used'
+            },
+            {
+              id: 'pp4',
+              prompt: 'Complete using was or were and the past participle: "The video entry phone system __________ (develop) by Marie Van Brittan Brown."',
+              placeholder: 'Type was/were + past participle...',
+              answers: ['was developed'],
+              hint: '"The video entry phone system" is singular → use "was" + past participle of "develop".',
+              displayAnswer: 'was developed'
+            },
+            {
+              id: 'pp5',
+              prompt: 'Complete using was or were and the past participle: "Windscreen wipers __________ (create) by Mary Anderson in 1903."',
+              placeholder: 'Type was/were + past participle...',
+              answers: ['were created'],
+              hint: '"Windscreen wipers" is plural → use "were" + past participle of "create".',
+              displayAnswer: 'were created'
+            },
+            {
+              id: 'pp6',
+              prompt: 'Complete using was or were and the past participle: "The mechanical dishwasher __________ (build) to protect delicate china."',
+              placeholder: 'Type was/were + past participle...',
+              answers: ['was built'],
+              hint: 'Irregular past participle of "build" is "built" + singular subject ("was built").',
+              displayAnswer: 'was built'
+            },
+            {
+              id: 'pp7',
+              prompt: 'Rewrite in the Past Simple Passive: "Josephine Cochrane invented the dishwasher."',
+              placeholder: 'Rewrite the full passive sentence...',
+              answers: [
+                'the dishwasher was invented by josephine cochrane.',
+                'the dishwasher was invented by josephine cochrane'
+              ],
+              hint: 'Start with "The dishwasher" + "was invented by Josephine Cochrane."',
+              displayAnswer: 'The dishwasher was invented by Josephine Cochrane.'
+            },
+            {
+              id: 'pp8',
+              prompt: 'Rewrite in the Past Simple Passive: "Marie Van Brittan Brown developed the video entry phone in 1966."',
+              placeholder: 'Rewrite the full passive sentence...',
+              answers: [
+                'the video entry phone was developed by marie van brittan brown in 1966.',
+                'the video entry phone was developed in 1966 by marie van brittan brown.',
+                'the video entry phone was developed by marie van brittan brown in 1966',
+                'the video entry phone was developed in 1966 by marie van brittan brown'
+              ],
+              hint: 'Start with "The video entry phone was developed..."',
+              displayAnswer: 'The video entry phone was developed by Marie Van Brittan Brown in 1966.'
+            },
+            {
+              id: 'pp9',
+              prompt: 'Complete using was or were and the past participle: "Many lives __________ (save) because improved life rafts __________ (introduce)."',
+              placeholder: 'Type verb 1 / verb 2...',
+              answers: ['were saved / were introduced', 'were saved, were introduced', 'were saved were introduced'],
+              hint: 'Both "Many lives" and "improved life rafts" are plural → use "were" in both.',
+              displayAnswer: 'were saved / were introduced'
+            }
+          ],
+          speakingPrompts: [
+            {
+              id: 'sp_pp1',
+              title: 'Exercise 1: Core Inventions Passive',
+              prompt: 'Read aloud or produce a sentence about the dishwasher and windscreen wipers using Past Simple Passive.',
+              target: 'The dishwasher was invented by Josephine Cochrane, and windscreen wipers were invented by Mary Anderson.',
+              keywords: ['dishwasher', 'was', 'invented', 'windscreen', 'wipers', 'were']
+            },
+            {
+              id: 'sp_pp2',
+              title: 'Exercise 2: Disposable Nappy & Solar House',
+              prompt: 'Speak about the disposable nappy and the first solar-heated house using "was + past participle".',
+              target: 'The disposable nappy was invented by Marion Donovan, and the first solar-heated house was designed by Maria Telkes.',
+              keywords: ['disposable', 'nappy', 'was', 'invented', 'solar-heated', 'house', 'designed']
+            },
+            {
+              id: 'sp_pp3',
+              title: 'Exercise 3: Maritime Safety & Video Security',
+              prompt: 'Produce a sentence contrasting plural "were used" on the Titanic with singular "was developed" in 1966.',
+              target: 'Four life rafts were used on the Titanic, and the video entry phone was developed in 1966.',
+              keywords: ['four', 'life', 'rafts', 'were', 'used', 'titanic', 'developed']
+            },
+            {
+              id: 'sp_pp4',
+              title: 'Exercise 4: Home Security System Focus',
+              prompt: 'Describe Marie Van Brittan Brown’s invention in the Past Simple Passive voice.',
+              target: 'The video entry phone system was developed by Marie Van Brittan Brown to improve home security.',
+              keywords: ['video', 'entry', 'phone', 'system', 'was', 'developed', 'security']
+            },
+            {
+              id: 'sp_pp5',
+              title: 'Exercise 5: Patenting & Manufacturing Passive',
+              prompt: 'Speak about how early prototypes were tested and built in the past.',
+              target: 'Early prototypes were tested carefully before the mechanical dishwasher was built for hotels.',
+              keywords: ['early', 'prototypes', 'were', 'tested', 'mechanical', 'dishwasher', 'built']
+            },
+            {
+              id: 'sp_pp6',
+              title: 'Exercise 6: Complete Passive Synthesis',
+              prompt: 'Synthesize singular and plural Past Simple Passive forms in a fluent statement about female inventors.',
+              target: 'Groundbreaking inventions were created by women, and everyday life was transformed by their designs.',
+              keywords: ['inventions', 'were', 'created', 'women', 'everyday', 'life', 'transformed']
+            }
+          ]
+        },
+        {
+          id: 'past_simple_verbs',
+          num: 2,
+          shortTitle: '2. Past Simple: Regular & Irregular Verbs',
+          title: 'Module 2: Past Simple: Regular and Irregular Verbs',
+          cefrTag: 'B1/B2 Completed Past Actions & Biographies',
+          meaning: 'We use the past simple to describe completed actions and events in the past. Regular verbs end in -ed, while irregular verbs have unique past forms (e.g., see → saw, find → found).',
+          structure: 'Regular: Subject + Verb-ed (invented, worked) | Irregular: Subject + V2 (saw, found, built)',
+          neuralTip: 'Morphology & Motor Memory: Group regular verbs by -ed ending sounds (/t/ worked, /d/ designed, /ɪd/ invented) and lock in irregular pairs (see → saw, find → found).',
+          examples: [
+            { en: 'Marion Donovan invented the disposable nappy.', es: 'Marion Donovan inventó el pañal desechable.', note: 'Regular Verb (invent → invented)' },
+            { en: 'Mary Anderson noticed a problem in New York.', es: 'Mary Anderson notó un problema en Nueva York.', note: 'Regular Verb (notice → noticed)' },
+            { en: 'Josephine Cochrane designed a dishwasher.', es: 'Josephine Cochrane diseñó un lavavajillas.', note: 'Regular Verb (design → designed)' },
+            { en: 'Maria Telkes worked at MIT.', es: 'Maria Telkes trabajó en el MIT.', note: 'Regular Verb (work → worked)' },
+            { en: 'Mary Anderson saw drivers struggling during a snowstorm.', es: 'Mary Anderson vio a los conductores luchando durante una tormenta de nieve.', note: 'Irregular Verb (see → saw)' },
+            { en: 'Josephine Cochrane found a manufacturer for her invention.', es: 'Josephine Cochrane encontró un fabricante para su invento.', note: 'Irregular Verb (find → found)' }
+          ],
+          exercises: [
+            {
+              id: 'ps1',
+              prompt: 'Complete with the correct past simple form: "Marion Donovan __________ (create) a new type of nappy."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['created'],
+              hint: 'Regular verb ending in -e: add -d.',
+              displayAnswer: 'created'
+            },
+            {
+              id: 'ps2',
+              prompt: 'Complete with the correct past simple form: "Mary Anderson __________ (see) a problem when it rained."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['saw'],
+              hint: 'Irregular verb: base form "see".',
+              displayAnswer: 'saw'
+            },
+            {
+              id: 'ps3',
+              prompt: 'Complete with the correct past simple form: "Josephine Cochrane __________ (find) a company to manufacture her machine."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['found'],
+              hint: 'Irregular verb: base form "find" (do not confuse with "founded").',
+              displayAnswer: 'found'
+            },
+            {
+              id: 'ps4',
+              prompt: 'Complete with the correct past simple form: "Maria Telkes __________ (work) in the United States."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['worked'],
+              hint: 'Regular verb: add -ed to the base form.',
+              displayAnswer: 'worked'
+            },
+            {
+              id: 'ps5',
+              prompt: 'Complete with the correct past simple form: "Marie Van Brittan Brown __________ (develop) a security system."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['developed'],
+              hint: 'Regular verb: add -ed to the base form.',
+              displayAnswer: 'developed'
+            },
+            {
+              id: 'ps6',
+              prompt: 'Complete with the correct past simple form: "Mary Anderson __________ (notice) that streetcar drivers had to open their windows."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['noticed'],
+              hint: 'Regular verb ending in -e: add -d.',
+              displayAnswer: 'noticed'
+            },
+            {
+              id: 'ps7',
+              prompt: 'Complete with the correct past simple form: "Maria Telkes __________ (build) the Dover Sun House with architect Eleanor Raymond."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['built'],
+              hint: 'Irregular verb ending in -t in the past simple.',
+              displayAnswer: 'built'
+            },
+            {
+              id: 'ps8',
+              prompt: 'Complete with the correct past simple form: "Marion Donovan __________ (make) waterproof covers using shower curtains."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['made'],
+              hint: 'Irregular verb: base form "make".',
+              displayAnswer: 'made'
+            },
+            {
+              id: 'ps9',
+              prompt: 'Complete with the correct past simple form: "These pioneering inventors __________ (change) modern technology forever."',
+              placeholder: 'Type the past simple verb...',
+              answers: ['changed'],
+              hint: 'Regular verb ending in -e: add -d.',
+              displayAnswer: 'changed'
+            }
+          ],
+          speakingPrompts: [
+            {
+              id: 'sp_ps1',
+              title: 'Exercise 1: Regular Verbs in Context',
+              prompt: 'Read aloud or produce a sentence using regular past simple verbs: invented, noticed, and designed.',
+              target: 'Marion Donovan invented the disposable nappy, Mary Anderson noticed a problem, and Josephine Cochrane designed a dishwasher.',
+              keywords: ['invented', 'disposable', 'nappy', 'noticed', 'problem', 'designed', 'dishwasher']
+            },
+            {
+              id: 'sp_ps2',
+              title: 'Exercise 2: Irregular Verb Mastery (Saw & Found)',
+              prompt: 'Produce a sentence using the irregular past simple verbs "saw" and "found".',
+              target: 'Mary Anderson saw a problem when it rained, and Josephine Cochrane found a company to manufacture her machine.',
+              keywords: ['saw', 'problem', 'rained', 'found', 'company', 'manufacture', 'machine']
+            },
+            {
+              id: 'sp_ps3',
+              title: 'Exercise 3: Research & Security Systems',
+              prompt: 'Speak about Maria Telkes working at MIT and Marie Van Brittan Brown developing a security system.',
+              target: 'Maria Telkes worked at MIT in the United States, and Marie Van Brittan Brown developed a security system.',
+              keywords: ['worked', 'mit', 'united', 'states', 'developed', 'security', 'system']
+            },
+            {
+              id: 'sp_ps4',
+              title: 'Exercise 4: Creative Problem Solving (Created & Made)',
+              prompt: 'Describe how Marion Donovan created a new type of nappy and made waterproof covers.',
+              target: 'Marion Donovan created a new type of nappy and made waterproof covers from shower curtains.',
+              keywords: ['created', 'new', 'type', 'nappy', 'made', 'waterproof', 'covers']
+            },
+            {
+              id: 'sp_ps5',
+              title: 'Exercise 5: Solar Engineering (Built & Worked)',
+              prompt: 'Speak about Maria Telkes building the first solar-heated house using irregular "built".',
+              target: 'Maria Telkes worked on solar energy and built the first solar-heated house in Massachusetts.',
+              keywords: ['worked', 'solar', 'energy', 'built', 'first', 'solar-heated', 'house']
+            },
+            {
+              id: 'sp_ps6',
+              title: 'Exercise 6: Regular & Irregular Synthesis',
+              prompt: 'Synthesize both regular and irregular past simple verbs in a statement about how inventors changed history.',
+              target: 'They saw everyday problems, found practical solutions, and created inventions that changed the world.',
+              keywords: ['saw', 'everyday', 'problems', 'found', 'solutions', 'created', 'changed']
+            }
+          ]
+        }
+      ];
+
+      let state = {
+        activeModuleId: 'past_passive',
+        answers: {},
+        revealed: {},
+        transcripts: {}
+      };
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') {
+            state = { ...state, ...parsed };
+            if (!state.revealed || typeof state.revealed !== 'object') {
+              state.revealed = {};
+            }
+          }
+        }
+      } catch (e) { /* sandbox safe */ }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) { /* sandbox safe */ }
+      }
+
+      function showToast(msg) {
+        const el = document.getElementById('toast-banner');
+        el.textContent = msg;
+        el.classList.remove('hidden');
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => el.classList.add('hidden'), 3200);
+      }
+
+      let availableVoices = [];
+      function populateVoices() {
+        const select = document.getElementById('voice-select');
+        if (!('speechSynthesis' in window)) {
+          select.innerHTML = '<option>TTS Unavailable</option>';
+          return;
+        }
+        const voices = window.speechSynthesis.getVoices() || [];
+        const usVoices = voices.filter(v => /en[-_]?US/i.test(v.lang));
+        const enVoices = usVoices.length ? usVoices : voices.filter(v => /^en/i.test(v.lang));
+        availableVoices = enVoices.length ? enVoices : voices;
+
+        select.innerHTML = '';
+        if (!availableVoices.length) {
+          const opt = document.createElement('option');
+          opt.textContent = 'en-US Default';
+          select.appendChild(opt);
+          return;
+        }
+        availableVoices.forEach((v, idx) => {
+          const opt = document.createElement('option');
+          opt.value = String(idx);
+          opt.textContent = v.name.replace(/Microsoft |Google /g, '');
+          if (/en[-_]?US/i.test(v.lang) && /natural|jenny|aria|guy|samantha|google us/i.test(v.name.toLowerCase())) {
+            opt.selected = true;
+          }
+          select.appendChild(opt);
+        });
+      }
+
+      if ('speechSynthesis' in window) {
+        populateVoices();
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+
+      function speakText(text) {
+        if (!('speechSynthesis' in window)) {
+          showToast('Speech synthesis is not supported in this browser.');
+          return;
+        }
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US';
+        const voiceSelect = document.getElementById('voice-select');
+        const rateSelect = document.getElementById('rate-select');
+        const idx = parseInt(voiceSelect.value, 10);
+        if (!isNaN(idx) && availableVoices[idx]) {
+          utter.voice = availableVoices[idx];
+        }
+        utter.rate = parseFloat(rateSelect.value) || 0.95;
+        window.speechSynthesis.speak(utter);
+      }
+
+      let activeRecognition = null;
+      let activeMicPromptId = null;
+
+      function normalizeText(str) {
+        return (str || '')
+          .toLowerCase()
+          .replace(/[’']/g, "'")
+          .replace(/[^a-z0-9'\s]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function evaluateSpeech(promptObj, spokenText) {
+        const normSpoken = normalizeText(spokenText);
+        if (!normSpoken) {
+          return {
+            score: 0,
+            matched: [],
+            missing: promptObj.keywords,
+            message: 'Speak into your microphone or type your spoken response to receive neural feedback.'
+          };
+        }
+        const words = new Set(normSpoken.split(' '));
+        const matched = promptObj.keywords.filter(k => words.has(k.toLowerCase()));
+        const missing = promptObj.keywords.filter(k => !words.has(k.toLowerCase()));
+        const score = Math.round((matched.length / promptObj.keywords.length) * 100);
+
+        let message = '';
+        if (score >= 85) {
+          message = 'Excellent oral production! Key Past Simple forms and target vocabulary were clearly recognized.';
+        } else if (score >= 50) {
+          message = 'Good attempt! Try articulating the missing target words clearly: ' + missing.join(', ') + '.';
+        } else {
+          message = 'Keep practicing! Listen to the American English model again and focus on: ' + missing.join(', ') + '.';
+        }
+        return { score, matched, missing, message };
+      }
+
+      function toggleSpeechRecognition(promptObj) {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          showToast('Live SpeechRecognition is unavailable here — you can type in the transcription box and click Evaluate!');
+          return;
+        }
+        if (activeRecognition && activeMicPromptId === promptObj.id) {
+          activeRecognition.stop();
+          activeRecognition = null;
+          activeMicPromptId = null;
+          render();
+          return;
+        }
+        if (activeRecognition) {
+          activeRecognition.stop();
+        }
+        try {
+          const rec = new SpeechRec();
+          rec.lang = 'en-US';
+          rec.interimResults = true;
+          rec.continuous = true;
+          activeRecognition = rec;
+          activeMicPromptId = promptObj.id;
+          render();
+
+          rec.onresult = (event) => {
+            let text = '';
+            for (let i = 0; i < event.results.length; i++) {
+              text += event.results[i][0].transcript + ' ';
+            }
+            state.transcripts[promptObj.id] = text.trim();
+            saveState();
+            const box = document.getElementById('transcript-box-' + promptObj.id);
+            if (box) box.value = state.transcripts[promptObj.id];
+            updateSpeechFeedbackDOM(promptObj);
+          };
+
+          rec.onerror = () => {
+            activeRecognition = null;
+            activeMicPromptId = null;
+            showToast('Microphone access was blocked or unavailable. You can still type in the transcription box to test feedback.');
+            render();
+          };
+
+          rec.onend = () => {
+            activeRecognition = null;
+            activeMicPromptId = null;
+            render();
+          };
+
+          rec.start();
+        } catch (err) {
+          activeRecognition = null;
+          activeMicPromptId = null;
+          showToast('Could not start microphone. Type in the transcription box to evaluate.');
+          render();
+        }
+      }
+
+      function updateSpeechFeedbackDOM(promptObj) {
+        const feedbackEl = document.getElementById('speech-feedback-' + promptObj.id);
+        if (!feedbackEl) return;
+        const spoken = state.transcripts[promptObj.id] || '';
+        const res = evaluateSpeech(promptObj, spoken);
+        const isGood = res.score >= 85;
+        feedbackEl.className = 'mt-3 p-3.5 rounded-xl border text-sm transition ' +
+          (spoken ? (isGood ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : 'bg-amber-50 border-amber-300 text-amber-900') : 'bg-slate-50 border-slate-200 text-slate-600');
+        feedbackEl.innerHTML = `
+          <div class="flex items-center justify-between gap-2 font-bold mb-1">
+            <span>Neural Pronunciation &amp; Grammar Check</span>
+            <span>${res.score}% Match</span>
+          </div>
+          <p class="text-xs leading-relaxed">${res.message}</p>
+          ${res.matched.length ? `<div class="mt-2 flex flex-wrap gap-1">${res.matched.map(w => `<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">✓ ${w}</span>`).join('')}</div>` : ''}
+        `;
+      }
+
+      function normalizeAnswer(str) {
+        return (str || '')
+          .toLowerCase()
+          .replace(/[’']/g, "'")
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function isAnswerUnlocked(exId) {
+        const entry = state.answers[exId];
+        return Boolean(
+          state.revealed[exId] ||
+          (entry && (entry.status === 'correct' || entry.status === 'wrong'))
+        );
+      }
+
+      function checkExercise(exId, mod) {
+        const ex = mod.exercises.find(e => e.id === exId);
+        if (!ex) return;
+        const input = document.getElementById('input-' + exId);
+        const val = input ? input.value : '';
+        const norm = normalizeAnswer(val);
+        const isCorrect = ex.answers.some(a => normalizeAnswer(a) === norm);
+
+        state.answers[exId] = {
+          value: val,
+          status: norm === '' ? 'idle' : (isCorrect ? 'correct' : 'wrong')
+        };
+        if (norm !== '') {
+          state.revealed[exId] = true;
+        }
+        saveState();
+        updateGlobalScore();
+        renderExerciseRow(ex, mod);
+      }
+
+      function updateGlobalScore() {
+        const total = MODULES.reduce((sum, m) => sum + m.exercises.length, 0);
+        const correct = Object.values(state.answers).filter(a => a && a.status === 'correct').length;
+        document.getElementById('global-score').textContent = String(correct);
+        document.getElementById('global-total').textContent = String(total);
+      }
+
+      function renderTabs() {
+        const nav = document.getElementById('module-tabs');
+        nav.innerHTML = '';
+        MODULES.forEach(m => {
+          const doneCount = m.exercises.filter(e => state.answers[e.id]?.status === 'correct').length;
+          const active = m.id === state.activeModuleId;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 border ' +
+            (active
+              ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50');
+          btn.innerHTML = `<span>${m.shortTitle}</span><span class="px-1.5 py-0.5 rounded-md text-[11px] ${active ? 'bg-indigo-500 text-white' : 'bg-slate-100 text-slate-600'}">${doneCount}/${m.exercises.length}</span>`;
+          btn.addEventListener('click', () => {
+            state.activeModuleId = m.id;
+            saveState();
+            render();
+          });
+          nav.appendChild(btn);
+        });
+      }
+
+      function renderExerciseRow(ex, mod) {
+        const card = document.getElementById('ex-card-' + ex.id);
+        if (!card) return;
+        const entry = state.answers[ex.id] || { value: '', status: 'idle' };
+        const unlocked = isAnswerUnlocked(ex.id);
+        const statusCol = card.querySelector('.pink-status-col');
+        const statusText = card.querySelector('.status-label');
+        const answerPanel = card.querySelector('.answer-reveal-box');
+        const audioBtn = card.querySelector('.speak-ex-btn');
+
+        statusCol.classList.remove('is-correct', 'is-wrong');
+        if (entry.status === 'correct') {
+          statusCol.classList.add('is-correct');
+          statusText.textContent = '✓ Correct! Neural link reinforced.';
+        } else if (entry.status === 'wrong') {
+          statusCol.classList.add('is-wrong');
+          statusText.textContent = '✗ Not quite. Review the answer or try again.';
+        } else {
+          statusText.textContent = 'Pending — Answer to turn green';
+        }
+
+        if (answerPanel) {
+          if (unlocked) {
+            answerPanel.classList.remove('hidden');
+          } else {
+            answerPanel.classList.add('hidden');
+          }
+        }
+
+        if (audioBtn) {
+          if (unlocked) {
+            audioBtn.disabled = false;
+            audioBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+            audioBtn.title = 'Listen to the answer';
+          } else {
+            audioBtn.disabled = true;
+            audioBtn.classList.add('opacity-40', 'cursor-not-allowed');
+            audioBtn.title = 'Submit your answer or click Answer first';
+          }
+        }
+      }
+
+      function render() {
+        renderTabs();
+        updateGlobalScore();
+
+        const mod = MODULES.find(m => m.id === state.activeModuleId) || MODULES[0];
+        const main = document.getElementById('app-main');
+
+        main.innerHTML = `
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 mb-2">${mod.cefrTag}</span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">${mod.title}</h2>
+              </div>
+              <button type="button" id="speak-rule-btn" class="px-3.5 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs sm:text-sm flex items-center gap-2 transition">
+                <span>🔊</span> Listen to Explanation
+              </button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Meaning &amp; Use</div>
+                <p class="text-sm text-slate-800 leading-relaxed">${mod.meaning}</p>
+              </div>
+              <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">Core Structure</div>
+                <p class="text-sm font-bold text-indigo-950 leading-relaxed">${mod.structure}</p>
+                <p class="text-xs text-indigo-700 mt-2"><strong>🧠 Neural Tip:</strong> ${mod.neuralTip}</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-extrabold text-slate-900">Guided Examples (${mod.examples.length} Models)</h3>
+                <p class="text-xs text-slate-500">Click the speaker button on any card to hear the native American English narrator and shadow aloud.</p>
+              </div>
+              <button type="button" id="play-all-examples-btn" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+                ▶ Play First 3
+              </button>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              ${mod.examples.map((ex, idx) => `
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:shadow-sm transition flex flex-col justify-between gap-3">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-700">Example ${idx + 1}</span>
+                      <button type="button" data-speak="${ex.en.replace(/"/g, '&quot;')}" class="speak-model-btn w-8 h-8 rounded-full bg-white border border-slate-200 hover:border-indigo-400 hover:text-indigo-600 flex items-center justify-center text-sm shadow-sm transition" title="Listen in American English">
+                        🔊
+                      </button>
+                    </div>
+                    <p class="text-sm font-semibold text-slate-900 leading-snug">${ex.en}</p>
+                    <p class="text-xs text-slate-500 italic mt-1">${ex.es}</p>
+                  </div>
+                  <div class="text-[11px] font-medium text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100">
+                    ${ex.note}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-extrabold text-slate-900">Active Recall Practice (${mod.exercises.length} Exercises)</h3>
+                <p class="text-xs text-slate-500">Answers stay hidden until you submit an attempt and click <strong>Check</strong>, or click <strong>Answer</strong>. The pink status column turns <strong>green</strong> when your answer is accurate.</p>
+              </div>
+              <button type="button" id="check-all-btn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm transition">
+                Check All Answers
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              ${mod.exercises.map((ex, idx) => {
+                const saved = state.answers[ex.id] || { value: '', status: 'idle' };
+                const unlocked = isAnswerUnlocked(ex.id);
+                const statusClass = saved.status === 'correct' ? 'is-correct' : (saved.status === 'wrong' ? 'is-wrong' : '');
+                const statusLabel = saved.status === 'correct'
+                  ? '✓ Correct! Neural link reinforced.'
+                  : (saved.status === 'wrong' ? '✗ Not quite. Review the answer or try again.' : 'Pending — Answer to turn green');
+
+                return `
+                  <div id="ex-card-${ex.id}" class="grid md:grid-cols-12 gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50/50 items-center">
+                    <div class="md:col-span-8 space-y-2">
+                      <div class="text-xs font-bold text-slate-500">Exercise ${idx + 1}</div>
+                      <p class="text-sm font-semibold text-slate-900">${ex.prompt}</p>
+                      <div class="flex flex-wrap gap-2">
+                        <input
+                          id="input-${ex.id}"
+                          type="text"
+                          value="${(saved.value || '').replace(/"/g, '&quot;')}"
+                          placeholder="${ex.placeholder}"
+                          autocomplete="off"
+                          class="flex-1 min-w-[200px] px-3 py-2 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        />
+                        <button type="button" data-check="${ex.id}" class="check-one-btn px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition">
+                          Check
+                        </button>
+                        <button type="button" data-hint="${ex.id}" class="hint-btn px-2.5 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition">
+                          Hint
+                        </button>
+                        <button type="button" data-reveal="${ex.id}" class="reveal-btn px-2.5 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition">
+                          Answer
+                        </button>
+                      </div>
+                      <div id="hint-box-${ex.id}" class="hidden text-xs text-indigo-700 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-200">
+                        💡 ${ex.hint}
+                      </div>
+                      <div class="answer-reveal-box ${unlocked ? '' : 'hidden'} text-xs text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 font-semibold">
+                        ✓ Answer: <span class="font-bold">${ex.displayAnswer}</span>
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-4 pink-status-col ${statusClass} border-2 rounded-xl p-3 flex flex-col justify-between gap-2 min-h-[82px]">
+                      <div class="text-xs font-bold status-label">${statusLabel}</div>
+                      <div class="flex items-center justify-between gap-2">
+                        <span class="text-[11px] opacity-80 font-medium">${unlocked ? 'Model Audio' : 'Locked until answered'}</span>
+                        <button
+                          type="button"
+                          data-ex-id="${ex.id}"
+                          data-speak="${ex.displayAnswer.replace(/"/g, '&quot;')}"
+                          ${unlocked ? '' : 'disabled'}
+                          title="${unlocked ? 'Listen to the answer' : 'Submit your answer or click Answer first'}"
+                          class="speak-ex-btn px-2.5 py-1 rounded-lg bg-white/80 hover:bg-white text-slate-800 text-xs font-bold shadow-sm transition ${unlocked ? '' : 'opacity-40 cursor-not-allowed'}"
+                        >
+                          🔊 Listen
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-6">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-700 mb-1">🎙️ Neural Speech Recognition Lab</span>
+              <h3 class="text-lg font-extrabold text-slate-900">Oral Production &amp; Transcription Feedback (6 Guided Speaking Exercises)</h3>
+              <p class="text-xs text-slate-600 mt-0.5">Practice speaking each target sentence aloud using the microphone or typing your response to receive instant American English pronunciation and grammar scoring.</p>
+            </div>
+
+            <div class="space-y-6">
+              ${mod.speakingPrompts.map((sp) => {
+                const isListening = activeRecognition && activeMicPromptId === sp.id;
+                return `
+                  <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h4 class="text-sm font-extrabold text-slate-900">${sp.title}</h4>
+                      <button type="button" data-speak-target="${sp.target.replace(/"/g, '&quot;')}" class="speak-target-btn px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition flex items-center gap-1.5">
+                        🔊 Hear Target Sentence
+                      </button>
+                    </div>
+
+                    <p class="text-xs text-slate-700 font-medium">${sp.prompt}</p>
+
+                    <div class="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs sm:text-sm font-semibold text-indigo-950">
+                      "${sp.target}"
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2.5">
+                      <button type="button" data-mic-id="${sp.id}" class="mic-toggle-btn px-3.5 py-2 rounded-xl font-bold text-xs text-white flex items-center gap-2 transition ${isListening ? 'bg-rose-600 speaking-pulse' : 'bg-rose-500 hover:bg-rose-600'}">
+                        <span>${isListening ? '⏹ Stop Listening' : '🎙️ Start Speaking'}</span>
+                      </button>
+                      <button type="button" data-eval-id="${sp.id}" class="eval-speech-btn px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+                        Evaluate Transcription
+                      </button>
+                      <button type="button" data-clear-id="${sp.id}" class="clear-speech-btn px-3 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition">
+                        Clear
+                      </button>
+                    </div>
+
+                    <div>
+                      <label for="transcript-box-${sp.id}" class="block text-[11px] font-bold text-slate-600 mb-1">
+                        Live Transcription Box (editable):
+                      </label>
+                      <textarea
+                        id="transcript-box-${sp.id}"
+                        rows="2"
+                        placeholder="Your spoken English will appear here..."
+                        class="w-full p-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"
+                      >${state.transcripts[sp.id] || ''}</textarea>
+                    </div>
+
+                    <div id="speech-feedback-${sp.id}"></div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        `;
+
+        document.getElementById('speak-rule-btn').addEventListener('click', () => {
+          speakText(mod.title + '. ' + mod.meaning + ' Structure: ' + mod.structure);
+        });
+
+        document.getElementById('play-all-examples-btn').addEventListener('click', () => {
+          const text = mod.examples.slice(0, 3).map(e => e.en).join(' ... ');
+          speakText(text);
+        });
+
+        main.querySelectorAll('.speak-model-btn').forEach(btn => {
+          btn.addEventListener('click', () => speakText(btn.getAttribute('data-speak')));
+        });
+
+        main.querySelectorAll('.speak-ex-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const exId = btn.getAttribute('data-ex-id');
+            if (!isAnswerUnlocked(exId)) {
+              showToast('Submit your answer or click Answer first to unlock audio.');
+              return;
+            }
+            speakText(btn.getAttribute('data-speak'));
+          });
+        });
+
+        main.querySelectorAll('.check-one-btn').forEach(btn => {
+          btn.addEventListener('click', () => checkExercise(btn.getAttribute('data-check'), mod));
+        });
+
+        document.getElementById('check-all-btn').addEventListener('click', () => {
+          mod.exercises.forEach(ex => checkExercise(ex.id, mod));
+          showToast('Checked all exercises in ' + mod.shortTitle + '!');
+        });
+
+        main.querySelectorAll('.hint-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const box = document.getElementById('hint-box-' + btn.getAttribute('data-hint'));
+            if (box) box.classList.toggle('hidden');
+          });
+        });
+
+        main.querySelectorAll('.reveal-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-reveal');
+            const ex = mod.exercises.find(e => e.id === id);
+            const inp = document.getElementById('input-' + id);
+            if (ex && inp) {
+              state.revealed[id] = true;
+              inp.value = ex.displayAnswer;
+              checkExercise(id, mod);
+            }
+          });
+        });
+
+        main.querySelectorAll('.speak-target-btn').forEach(btn => {
+          btn.addEventListener('click', () => speakText(btn.getAttribute('data-speak-target')));
+        });
+
+        main.querySelectorAll('.mic-toggle-btn').forEach(btn => {
+          const spId = btn.getAttribute('data-mic-id');
+          const spObj = mod.speakingPrompts.find(s => s.id === spId);
+          if (spObj) {
+            btn.addEventListener('click', () => toggleSpeechRecognition(spObj));
+          }
+        });
+
+        main.querySelectorAll('.eval-speech-btn').forEach(btn => {
+          const spId = btn.getAttribute('data-eval-id');
+          const spObj = mod.speakingPrompts.find(s => s.id === spId);
+          if (spObj) {
+            btn.addEventListener('click', () => {
+              const box = document.getElementById('transcript-box-' + spId);
+              state.transcripts[spId] = box ? box.value : '';
+              saveState();
+              updateSpeechFeedbackDOM(spObj);
+            });
+          }
+        });
+
+        main.querySelectorAll('.clear-speech-btn').forEach(btn => {
+          const spId = btn.getAttribute('data-clear-id');
+          const spObj = mod.speakingPrompts.find(s => s.id === spId);
+          if (spObj) {
+            btn.addEventListener('click', () => {
+              state.transcripts[spId] = '';
+              saveState();
+              const box = document.getElementById('transcript-box-' + spId);
+              if (box) box.value = '';
+              updateSpeechFeedbackDOM(spObj);
+            });
+          }
+        });
+
+        mod.speakingPrompts.forEach(sp => {
+          const tBox = document.getElementById('transcript-box-' + sp.id);
+          if (tBox) {
+            tBox.addEventListener('input', () => {
+              state.transcripts[sp.id] = tBox.value;
+              saveState();
+            });
+          }
+          updateSpeechFeedbackDOM(sp);
+        });
+      }
+
+      document.getElementById('reset-progress-btn').addEventListener('click', () => {
+        state.answers = {};
+        state.revealed = {};
+        state.transcripts = {};
+        saveState();
+        render();
+        showToast('All module progress has been reset.');
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
